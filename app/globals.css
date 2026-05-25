@@ -671,6 +671,70 @@ section.tight { padding: 56px 0; }
 }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
+/* react-phone-number-input — match site form fields */
+.phone-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  padding: 4px 8px 4px 12px;
+}
+.phone-input.PhoneInput--focus,
+.phone-input:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+.phone-input .PhoneInputCountry {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 4px;
+  border-right: 1px solid var(--line);
+  margin-right: 4px;
+}
+.phone-input .PhoneInputCountryIcon {
+  width: 22px; height: 16px;
+  box-shadow: none;
+  background: transparent;
+}
+.phone-input .PhoneInputCountryIcon--border {
+  box-shadow: 0 0 0 1px var(--line);
+}
+.phone-input .PhoneInputCountryIconImg { display: block; }
+.phone-input .PhoneInputCountrySelectArrow {
+  color: var(--muted);
+  opacity: 1;
+  margin-left: 2px;
+  border-width: 0 1px 1px 0;
+  border-style: solid;
+  width: 6px; height: 6px;
+  transform: rotate(45deg) translateY(-2px);
+}
+.phone-input input.PhoneInputInput {
+  border: 0;
+  outline: none;
+  background: transparent;
+  padding: 7px 6px;
+  font: inherit; font-size: 14px;
+  color: var(--ink);
+  width: 100%;
+}
+.phone-input input.PhoneInputInput::placeholder {
+  color: var(--muted);
+}
+.phone-input .PhoneInputCountrySelect {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* reCAPTCHA badge — pin above the cookie/footer line on small screens */
+.grecaptcha-badge {
+  z-index: 40 !important;
+}
+
 .div-pick {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
   margin-bottom: 18px;

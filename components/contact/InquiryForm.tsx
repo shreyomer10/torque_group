@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useRef, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
+import ReCAPTCHA from "react-google-recaptcha";
+import "react-phone-number-input/style.css";
 import { ArrowIcon } from "@/components/ui/Button";
 import { contact, companies, type CompanyId } from "@/content";
 
@@ -14,22 +17,52 @@ type Form = {
   honeypot: string;
 };
 
+const EMAIL_RX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
 export function InquiryForm({ company }: { company: CompanyId }) {
   const f = contact.step2.fields;
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<Form>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<Form>({ defaultValues: { phone: "" } });
   const [pageLoadedAt] = useState<number>(() => Date.now());
   const [state, setState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   useEffect(() => {
     if (state === "success") setState("idle");
-    // Reset success state when user re-selects a different company.
-
   }, [company]);
 
   const onSubmit = handleSubmit(async (values) => {
     setState("sending");
     setErrorMsg("");
+
+    // Get a fresh reCAPTCHA token (invisible — fires on demand).
+    let captchaToken = "";
+    if (RECAPTCHA_SITE_KEY && recaptchaRef.current) {
+      try {
+        const t = await recaptchaRef.current.executeAsync();
+        recaptchaRef.current.reset();
+        captchaToken = t ?? "";
+        if (!captchaToken) {
+          setErrorMsg("Captcha verification failed. Please try again.");
+          setState("error");
+          return;
+        }
+      } catch {
+        setErrorMsg("Captcha verification failed. Please try again.");
+        setState("error");
+        return;
+      }
+    }
+
     try {
       const res = await fetch("/api/inquiry", {
         method: "POST",
@@ -42,6 +75,7 @@ export function InquiryForm({ company }: { company: CompanyId }) {
           phone: values.phone,
           message: values.message,
           honeypot: values.honeypot ?? "",
+          captchaToken,
           _ts: pageLoadedAt,
         }),
       });
@@ -89,9 +123,17 @@ export function InquiryForm({ company }: { company: CompanyId }) {
             placeholder={f.name.placeholder}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "name-err" : undefined}
-            {...register("name", { required: true, minLength: 2, maxLength: 120 })}
+            {...register("name", {
+              required: "Required",
+              minLength: { value: 2, message: "At least 2 characters" },
+              maxLength: { value: 120, message: "Too long" },
+              pattern: {
+                value: /^[\p{L}\s.'-]+$/u,
+                message: "Letters only",
+              },
+            })}
           />
-          {errors.name && <span id="name-err" className="err">Required</span>}
+          {errors.name && <span id="name-err" className="err">{errors.name.message}</span>}
         </div>
         <div className="field">
           <label htmlFor="companyName">{f.company.label}</label>
@@ -101,9 +143,13 @@ export function InquiryForm({ company }: { company: CompanyId }) {
             placeholder={f.company.placeholder}
             aria-invalid={!!errors.companyName}
             aria-describedby={errors.companyName ? "companyName-err" : undefined}
-            {...register("companyName", { required: true, maxLength: 180 })}
+            {...register("companyName", {
+              required: "Required",
+              minLength: { value: 2, message: "At least 2 characters" },
+              maxLength: { value: 180, message: "Too long" },
+            })}
           />
-          {errors.companyName && <span id="companyName-err" className="err">Required</span>}
+          {errors.companyName && <span id="companyName-err" className="err">{errors.companyName.message}</span>}
         </div>
       </div>
 
@@ -114,26 +160,43 @@ export function InquiryForm({ company }: { company: CompanyId }) {
             id="email"
             type="email"
             placeholder={f.email.placeholder}
+            autoComplete="email"
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "email-err" : undefined}
             {...register("email", {
-              required: true,
-              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              required: "Required",
+              maxLength: { value: 180, message: "Too long" },
+              pattern: { value: EMAIL_RX, message: "Enter a valid email" },
             })}
           />
-          {errors.email && <span id="email-err" className="err">Valid email required</span>}
+          {errors.email && <span id="email-err" className="err">{errors.email.message}</span>}
         </div>
         <div className="field">
           <label htmlFor="phone">{f.phone.label}</label>
-          <input
-            id="phone"
-            type="tel"
-            placeholder={f.phone.placeholder}
-            aria-invalid={!!errors.phone}
-            aria-describedby={errors.phone ? "phone-err" : undefined}
-            {...register("phone", { required: true, minLength: 4, maxLength: 40 })}
+          <Controller
+            name="phone"
+            control={control}
+            rules={{
+              required: "Required",
+              validate: (v) => (v && isValidPhoneNumber(v)) || "Enter a valid phone number",
+            }}
+            render={({ field }) => (
+              <PhoneInput
+                id="phone"
+                international
+                defaultCountry="IN"
+                countryCallingCodeEditable={false}
+                placeholder="Phone number"
+                value={field.value}
+                onChange={(v) => field.onChange(v ?? "")}
+                onBlur={field.onBlur}
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? "phone-err" : undefined}
+                className="phone-input"
+              />
+            )}
           />
-          {errors.phone && <span id="phone-err" className="err">Required</span>}
+          {errors.phone && <span id="phone-err" className="err">{errors.phone.message}</span>}
         </div>
       </div>
 
@@ -144,9 +207,13 @@ export function InquiryForm({ company }: { company: CompanyId }) {
           placeholder={f.message.placeholder}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "message-err" : undefined}
-          {...register("message", { required: true, minLength: 10, maxLength: 4000 })}
+          {...register("message", {
+            required: "Required",
+            minLength: { value: 10, message: "At least 10 characters" },
+            maxLength: { value: 4000, message: "Too long" },
+          })}
         />
-        {errors.message && <span id="message-err" className="err">At least 10 characters</span>}
+        {errors.message && <span id="message-err" className="err">{errors.message.message}</span>}
       </div>
 
       {/* Honeypot — hidden from users, visible to bots */}
@@ -154,6 +221,10 @@ export function InquiryForm({ company }: { company: CompanyId }) {
         <label htmlFor="hp">Leave this field empty</label>
         <input id="hp" type="text" tabIndex={-1} autoComplete="off" {...register("honeypot")} />
       </div>
+
+      {RECAPTCHA_SITE_KEY && (
+        <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHA_SITE_KEY} size="invisible" badge="bottomright" />
+      )}
 
       {state === "error" && (
         <p className="err" role="alert" style={{ marginTop: 8 }}>
@@ -182,7 +253,7 @@ export function InquiryForm({ company }: { company: CompanyId }) {
         >
           {contact.step2.helper}
         </span>
-        <button type="submit" className="btn btn-accent" disabled={state === "sending"}>
+        <button type="submit" className="btn" disabled={state === "sending"}>
           {state === "sending" ? contact.step2.sending : contact.step2.submit}
           {state !== "sending" && <ArrowIcon />}
         </button>

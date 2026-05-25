@@ -46,7 +46,7 @@ export function Nav() {
           ))}
         </nav>
 
-        <Link href={nav.cta.href} className="btn btn-accent btn-sm hidden-mobile" style={{ display: "inline-flex" }}>
+        <Link href={nav.cta.href} className="btn btn-sm hidden-mobile" style={{ display: "inline-flex" }}>
           {nav.cta.label}
           <ArrowIcon />
         </Link>
@@ -77,7 +77,7 @@ export function Nav() {
                 {l.label}
               </Link>
             ))}
-            <Link href={nav.cta.href} className="btn btn-accent drawer-cta">
+            <Link href={nav.cta.href} className="btn drawer-cta">
               {nav.cta.label}
               <ArrowIcon />
             </Link>

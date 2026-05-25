@@ -39,17 +39,22 @@ That's roughly 30x more than a typical corporate site needs.
 
 Production + Preview both need every var below.
 
-[ ] BREVO_API_KEY           xkeysib-xxxxxxxxxxxxxxxx
-[ ] MAIL_FROM_EMAIL         noreply@torquegroup.com
-                             (or your verified sender during testing)
-[ ] MAIL_FROM_NAME          "Torque Group"
-[ ] MAIL_GROUP              group@torquegroup.com
-[ ] MAIL_INSTITUTE          admissions@torquetechnicsinstitute.com
-[ ] MAIL_CHENNAI            service@torquetechnics.com
-[ ] MAIL_SUBHAGS            sales@subhags.com
-[ ] MAIL_NULITE             safety@nulite.in
-[ ] MAIL_WOLFF              info@armaturen-wolff.de
-[ ] NEXT_PUBLIC_SITE_URL    https://torquegroup.com
+[ ] BREVO_API_KEY                   xkeysib-xxxxxxxxxxxxxxxx
+[ ] MAIL_FROM_EMAIL                 noreply@torquegroup.com
+                                     (or your verified sender during testing)
+[ ] MAIL_FROM_NAME                  "Torque Group"
+[ ] MAIL_GROUP                      group@torquegroup.com
+[ ] MAIL_INSTITUTE                  admissions@torquetechnicsinstitute.com
+[ ] MAIL_CHENNAI                    service@torquetechnics.com
+[ ] MAIL_SUBHAGS                    sales@subhags.com
+[ ] MAIL_NULITE                     safety@nulite.in
+[ ] MAIL_WOLFF                      info@armaturen-wolff.de
+[ ] NEXT_PUBLIC_SITE_URL            https://torquegroup.com
+[ ] NEXT_PUBLIC_RECAPTCHA_SITE_KEY  6Lxxxxxxxxxxxxxxx  (optional)
+[ ] RECAPTCHA_SECRET_KEY            6Lxxxxxxxxxxxxxxx  (optional, paired)
+
+If the two RECAPTCHA vars are blank, the form skips captcha entirely.
+For production, ALWAYS set both. See section 11 below for setup.
 
 Local dev: copy .env.local.example -> .env.local, fill in same values.
 
@@ -204,6 +209,28 @@ hour per warm serverless instance.
 [ ] Monitor Brevo dashboard for delivery failures and daily quota usage
 [ ] Monitor Vercel Analytics for traffic + Core Web Vitals
 [ ] Run npm outdated quarterly, apply patch upgrades
+
+
+----------------------------------------------------------------
+11. reCAPTCHA v2 INVISIBLE (bot protection on form submit)
+----------------------------------------------------------------
+
+[ ] Sign in at https://www.google.com/recaptcha/admin/create
+[ ] Label: "Torque Group website"
+[ ] Type: "reCAPTCHA v2 -> Invisible reCAPTCHA badge"
+[ ] Domains: torquegroup.com (and any preview/staging domains)
+              localhost  (for local dev)
+[ ] Accept terms, submit. You get:
+      - Site Key   -> NEXT_PUBLIC_RECAPTCHA_SITE_KEY (safe to expose)
+      - Secret Key -> RECAPTCHA_SECRET_KEY (server only)
+[ ] Paste both into Vercel env vars + .env.local
+[ ] Verify on production: submit the form. If you see a Google
+    challenge popup, captcha is working. Most submissions are
+    auto-allowed via the invisible flow.
+
+Behaviour: when both env vars are blank, the form sends without
+captcha — that's the dev default. Production should always have
+both set.
 
 
 ----------------------------------------------------------------

@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { inquirySchema } from "@/lib/inquiry-schema";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { verifyCaptcha } from "@/lib/recaptcha";
 import { sendInquiry } from "@/lib/email";
 import type { CompanyId } from "@/content";
 
@@ -46,6 +47,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { ok: false, error: "Too many submissions. Please try again later." },
       { status: 429, headers: { "Retry-After": String(Math.ceil((rate.resetAt - Date.now()) / 1000)) } }
+    );
+  }
+
+  // Verify reCAPTCHA token (no-op if RECAPTCHA_SECRET_KEY isn't set).
+  const captchaOk = await verifyCaptcha(data.captchaToken, ip);
+  if (!captchaOk) {
+    return NextResponse.json(
+      { ok: false, error: "Captcha verification failed. Please try again." },
+      { status: 400 }
     );
   }
 

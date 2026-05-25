@@ -15,7 +15,7 @@ export function ContactTeaser() {
             <p style={{ maxWidth: 560, marginTop: 8 }}>{c.body}</p>
           </div>
           <div>
-            <LinkButton href={c.cta.href} variant="accent" withArrow>
+            <LinkButton href={c.cta.href} withArrow>
               {c.cta.label}
             </LinkButton>
           </div>

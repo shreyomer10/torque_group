@@ -83,7 +83,6 @@ export const nav = {
     { href: "/companies",      label: "Group Companies" },
     { href: "/infrastructure", label: "Infrastructure" },
     { href: "/industries",     label: "Industries Served" },
-    { href: "/contact",        label: "Contact" },
   ] as const,
   cta: { label: "Get In Touch", href: "/contact" } satisfies CTA,
 } as const;
