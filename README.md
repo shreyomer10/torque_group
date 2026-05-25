@@ -8,7 +8,7 @@ Production Next.js 15 (App Router) build of the Torque Group corporate website, 
 - Framer-free reveal-on-scroll (lightweight IntersectionObserver in `components/layout/Reveal.tsx`)
 - lucide-react icons
 - React Hook Form + Zod for the inquiry form
-- Resend for transactional email (server-side via `app/api/inquiry/route.ts`)
+- Brevo (formerly Sendinblue) for transactional email — 300/day free tier, no SDK dependency, called via REST. Server-side from `app/api/inquiry/route.ts`.
 - In-memory rate limiter (per-serverless-instance) — see `lib/rate-limit.ts`. Swap for `@upstash/ratelimit` if global durable limits are needed.
 - Vercel Analytics + GA4 (consent-gated)
 
@@ -18,7 +18,7 @@ Production Next.js 15 (App Router) build of the Torque Group corporate website, 
 # from this directory (website/)
 pnpm install                # or `npm install`
 copy .env.local.example .env.local
-# fill in RESEND_API_KEY at minimum
+# fill in BREVO_API_KEY at minimum
 pnpm dev                    # http://localhost:3000
 ```
 
@@ -38,7 +38,7 @@ pnpm start
 1. Push this folder to a GitHub repo.
 2. In Vercel: New Project → import the repo → Framework preset: Next.js.
 3. Add **every** variable from `.env.local.example` in the Vercel project settings (Production + Preview).
-4. Verify your domain in **Resend** (3 DNS records on torquegroup.com). Until verified, sends from `noreply@torquegroup.com` will fail.
+4. Verify either a single sender email OR the full domain in **Brevo** (Senders & IPs settings). For testing, a verified Gmail sender works. For production, verify torquegroup.com with the DNS records Brevo provides.
 5. First deploy — done.
 
 To change which inbox a company's inquiries go to, edit `MAIL_INSTITUTE` / `MAIL_CHENNAI` / etc. in Vercel and redeploy (or use the "Redeploy" button). No code change needed.
@@ -48,10 +48,12 @@ To change which inbox a company's inquiries go to, edit `MAIL_INSTITUTE` / `MAIL
 - User picks a company → form posts to `/api/inquiry`.
 - Server validates via Zod, rejects if honeypot non-empty or dwell time <3s.
 - Rate limit: 5 submissions / IP / hour (per warm serverless instance).
-- Resend fires two emails in parallel:
-  - **Notification** → company inbox + CC group, reply-to = submitter
+- Two Brevo API calls fire in parallel:
+  - **Notification** → company inbox, CC group desk, reply-to = submitter
   - **Auto-reply** → submitter
 - Returns `{ ok: true }` or `{ ok: false, error }`.
+
+Brevo only requires the SENDER to be verified (an email or a full domain). Recipients can be any address — so it's easy to test the full flow before the real domain is verified.
 
 ## Content
 
@@ -74,7 +76,7 @@ If a file is missing, the page renders the wireframe's grid-paper placeholder vi
 
 ## Rate-limit note
 
-The in-memory limiter is per-serverless-instance. Vercel may spin up multiple instances, so the practical cap is roughly `5 × instances` per hour from one IP. For most marketing sites this is plenty; Resend's per-domain limits are the real ceiling. If abuse becomes an issue:
+The in-memory limiter is per-serverless-instance. Vercel may spin up multiple instances, so the practical cap is roughly `5 × instances` per hour from one IP. For most marketing sites this is plenty; Brevo's 300/day cap is the real ceiling. If abuse becomes an issue:
 
 1. Sign up for Upstash (free tier).
 2. Replace `lib/rate-limit.ts` body with `@upstash/ratelimit`'s sliding window.
@@ -102,6 +104,6 @@ lib/
   schema.ts           JSON-LD (Organization, BreadcrumbList)
   inquiry-schema.ts   Zod schema for the form
   rate-limit.ts       in-memory limiter
-  email.ts            Resend client + HTML templates
+  email.ts            Brevo REST client + HTML templates
 wireframe/            DO NOT EDIT — the visual spec
 ```

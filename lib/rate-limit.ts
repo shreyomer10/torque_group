@@ -3,8 +3,8 @@
  *
  * No external service required. Uses an in-memory Map scoped to each
  * Vercel serverless instance. Vercel reuses instances opportunistically,
- * so this is effective for casual abuse but NOT a hard ceiling — Resend's
- * per-domain limits are the real backstop.
+ * so this is effective for casual abuse but NOT a hard ceiling — Brevo's
+ * 300/day quota is the real backstop.
  *
  * To upgrade to a global, durable limit later, swap this file for
  * @upstash/ratelimit + Upstash Redis without changing callers.

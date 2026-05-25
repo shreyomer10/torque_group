@@ -825,14 +825,52 @@ section.tight { padding: 56px 0; }
 .team-body p { font-size: 13.5px; margin: 0; color: var(--ink-soft); }
 
 /* ----- Matrix ----- */
+.matrix-desktop { display: block; }
+.matrix-mobile { display: none; }
+@media (max-width: 720px) {
+  .matrix-desktop { display: none; }
+  .matrix-mobile  { display: grid; gap: 14px; }
+}
+
+.matrix-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 20px 22px;
+}
+.matrix-card h4 {
+  font-family: var(--font-barlow), "Barlow Condensed", sans-serif;
+  font-size: 20px;
+  color: var(--navy);
+  margin: 0 0 14px;
+}
+.matrix-card ul {
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.matrix-card li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 13.5px;
+}
+.matrix-card li:last-child { border-bottom: none; }
+.matrix-card li .sector-name {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.matrix-card li[data-served="no"] .sector-name {
+  color: var(--muted);
+}
+
 .matrix-wrap {
   background: var(--surface);
   border: 1px solid var(--line);
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 .matrix-table {
   width: 100%; border-collapse: collapse;
-  min-width: 760px;
 }
 .matrix-table th, .matrix-table td {
   padding: 14px 10px;

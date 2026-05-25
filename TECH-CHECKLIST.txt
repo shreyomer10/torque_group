@@ -6,25 +6,31 @@ Everything technical: env vars, file paths, deploy steps,
 provider accounts.
 
 ----------------------------------------------------------------
-1. RESEND (transactional email)
+1. BREVO (transactional email)
 ----------------------------------------------------------------
 
-[ ] Sign up at https://resend.com
+Brevo (formerly Sendinblue). Free tier: 300/day = ~9,000/month.
+That's roughly 30x more than a typical corporate site needs.
+
+[ ] Sign up at https://www.brevo.com
     Account email: ____________________________________________
 
-[ ] Verify torquegroup.com (or whatever the final domain is)
-    Resend dashboard -> Domains -> Add Domain
-    Add the 3 DNS records they provide (SPF, DKIM, MX). Verification
-    usually takes <10 min after DNS propagates.
+[ ] Add a verified SENDER (for testing without a real domain)
+    Brevo dashboard -> Senders & IPs -> Senders -> Add a sender
+    Enter any email you control (e.g. your Gmail). Brevo emails
+    you a verification link. Click it. That email is now a valid
+    "from" address for testing.
 
-[ ] Until the real domain is verified, use Resend's sandbox sender:
-    MAIL_FROM=onboarding@resend.dev
-    Note: sandbox can only send TO the Resend account owner email.
+[ ] OR verify the production DOMAIN (for clean deliverability)
+    Brevo dashboard -> Senders & IPs -> Domains -> Add a domain
+    Add the DNS records they provide (SPF, DKIM, DMARC).
+    Verification usually completes within an hour.
 
-[ ] Generate an API key
-    Resend dashboard -> API Keys -> Create
-    Permission: "Sending access" only.
-    Paste into Vercel as RESEND_API_KEY.
+[ ] Generate a transactional API key
+    Brevo dashboard -> SMTP & API -> API keys -> Generate
+    Name: "torque-website"
+    Permission: transactional emails only.
+    Paste into Vercel as BREVO_API_KEY.
 
 
 ----------------------------------------------------------------
@@ -33,9 +39,10 @@ provider accounts.
 
 Production + Preview both need every var below.
 
-[ ] RESEND_API_KEY          re_xxxxxxxxxxxxxxxx
-[ ] MAIL_FROM               "Torque Group <noreply@torquegroup.com>"
-                             (use onboarding@resend.dev while testing)
+[ ] BREVO_API_KEY           xkeysib-xxxxxxxxxxxxxxxx
+[ ] MAIL_FROM_EMAIL         noreply@torquegroup.com
+                             (or your verified sender during testing)
+[ ] MAIL_FROM_NAME          "Torque Group"
 [ ] MAIL_GROUP              group@torquegroup.com
 [ ] MAIL_INSTITUTE          admissions@torquetechnicsinstitute.com
 [ ] MAIL_CHENNAI            service@torquetechnics.com
@@ -138,19 +145,25 @@ Highest-impact fields:
 6. INQUIRY FORM — TESTING WITHOUT A VERIFIED DOMAIN
 ----------------------------------------------------------------
 
-For pre-launch QA before torquegroup.com is verified in Resend:
+For pre-launch QA before torquegroup.com is verified in Brevo,
+Brevo only requires that the SENDER email is verified (not the
+recipient). So you can send to ANY recipient.
 
-[ ] Set MAIL_FROM=onboarding@resend.dev in .env.local
-[ ] Set ALL company inboxes + MAIL_GROUP to your own email
-    (the one that owns the Resend account — sandbox restriction)
-[ ] Submit the form on http://localhost:3000/contact
-[ ] You should receive 2 emails:
-      1. The "New inquiry" notification (would go to company + group)
-      2. The auto-reply (would go to whoever filled the form)
+[ ] In Brevo: Senders & IPs -> Senders -> add e.g. shreyomer10@gmail.com
+    Click the verification link Brevo emails you.
+[ ] In .env.local:
+      MAIL_FROM_EMAIL=shreyomer10@gmail.com
+      MAIL_FROM_NAME="Torque Group (Test)"
+      MAIL_GROUP=shreyomer10@gmail.com
+      MAIL_INSTITUTE=luckyomer10@gmail.com    (and the rest...)
+[ ] Submit the form at http://localhost:3000/contact
+[ ] You'll receive 2 emails:
+      1. The "New inquiry" notification at the routed company inbox
+         (luckyomer10@gmail.com in this test) with shreyomer10@ on CC
+      2. The auto-reply at whatever email the form submitter entered
 
-When the real domain is verified, swap MAIL_FROM back to
-"Torque Group <noreply@torquegroup.com>" and put the real company
-inboxes into MAIL_INSTITUTE etc.
+When the real domain is verified, swap MAIL_FROM_EMAIL to
+noreply@torquegroup.com and put the real company inboxes back.
 
 
 ----------------------------------------------------------------
@@ -188,7 +201,7 @@ hour per warm serverless instance.
 [ ] Edit content/index.ts for any copy changes
 [ ] Swap email destinations via Vercel env vars (no redeploy
     needed — just "Redeploy" button)
-[ ] Monitor Resend dashboard for delivery failures
+[ ] Monitor Brevo dashboard for delivery failures and daily quota usage
 [ ] Monitor Vercel Analytics for traffic + Core Web Vitals
 [ ] Run npm outdated quarterly, apply patch upgrades
 
