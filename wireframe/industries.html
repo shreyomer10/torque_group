@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Industries — Torque Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="industries.html">
+
+<section class="page-head">
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; <span>Industries Served</span></div>
+    <span class="eyebrow">INDUSTRIES SERVED</span>
+    <h1 style="margin-top:14px; max-width:900px;">Maritime, offshore, industrial — wherever engineered systems run.</h1>
+    <p style="max-width:720px;">Output from Torque Group companies reaches merchant fleets, shipbuilders, offshore operators, industrial plants and marine training programmes across India and overseas yards.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="industries reveal">
+      <div class="industry">
+        <div class="num">SECTOR · 01</div>
+        <h4>Marine — Merchant Fleet</h4>
+        <p>Pumps, valves, hydraulics and shipboard service for cargo, container and tanker fleets in operation.</p>
+      </div>
+      <div class="industry">
+        <div class="num">SECTOR · 02</div>
+        <h4>Shipbuilding & Yards</h4>
+        <p>New-build supply of valves, pumping systems and IMO signage to Indian and international shipyards.</p>
+      </div>
+      <div class="industry">
+        <div class="num">SECTOR · 03</div>
+        <h4>Offshore & Energy</h4>
+        <p>Process valves, hydraulic systems and retrofit engineering for offshore support vessels and platforms.</p>
+      </div>
+      <div class="industry">
+        <div class="num">SECTOR · 04</div>
+        <h4>Industrial Manufacturing</h4>
+        <p>Engineered pumping infrastructure and process flow systems for industrial plants and utilities.</p>
+      </div>
+      <div class="industry">
+        <div class="num">SECTOR · 05</div>
+        <h4>Marine Safety & Compliance</h4>
+        <p>IMO-compliant signages and shipboard safety equipment for new-build and dry-dock retrofit campaigns.</p>
+      </div>
+      <div class="industry">
+        <div class="num">SECTOR · 06</div>
+        <h4>Marine Technical Training</h4>
+        <p>Cadet, pre-sea and post-sea practical training programmes with workshop and simulator infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg-alt);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="text">
+        <span class="eyebrow">COMPANY × SECTOR MATRIX</span>
+        <h2>How companies serve each industry</h2>
+      </div>
+    </div>
+    <div class="matrix-wrap">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th class="row-head">Company ↓ &nbsp;/&nbsp; Sector →</th>
+            <th>Marine</th>
+            <th>Shipbuild</th>
+            <th>Offshore</th>
+            <th>Industrial</th>
+            <th>Safety</th>
+            <th>Training</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="text">
+        <span class="eyebrow">OPERATING WORKFLOW</span>
+        <h2>From inquiry to commissioned system</h2>
+      </div>
+    </div>
+    <div class="workflow reveal">
+      <div class="step"><div class="step-num">FLOW · 01</div><h5>Specification</h5><p>Customer specs, class society and IMO requirements captured.</p></div>
+      <div class="step"><div class="step-num">FLOW · 02</div><h5>Engineering</h5><p>Drawings, schematics and BOM produced across divisions.</p></div>
+      <div class="step"><div class="step-num">FLOW · 03</div><h5>Manufacturing</h5><p>Pumps (Subhags), valves (Wolff), signage (Nulite) sourced in-group.</p></div>
+      <div class="step"><div class="step-num">FLOW · 04</div><h5>Execution</h5><p>Workshop fabrication and shipboard installation by TT Chennai field teams.</p></div>
+      <div class="step"><div class="step-num">FLOW · 05</div><h5>Trials & Handover</h5><p>Class survey, IMO compliance check and operational handover.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Build the company-sector matrix (1 = served, 0 = not served)
+  (function(){
+    const rows = [
+      ['Torque Technics Institute', [1,0,0,0,0,1]],
+      ['Torque Technics Chennai',   [1,1,1,1,0,1]],
+      ['Subhags Engineers',         [1,1,1,1,0,0]],
+      ['Nulite',                    [1,1,0,0,1,0]],
+      ['Armaturen-Wolff LLP',       [1,1,1,1,0,0]],
+    ];
+    const tick = `<span class="cell-icon yes" aria-label="Served">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>`;
+    const cross = `<span class="cell-icon no" aria-label="Not served">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </span>`;
+    const tbody = document.querySelector('.matrix-table tbody');
+    if (!tbody) return;
+    tbody.innerHTML = rows.map(([name, cells]) => `
+      <tr>
+        <td class="row-head">${name}</td>
+        ${cells.map(c => `<td>${c ? tick : cross}</td>`).join('')}
+      </tr>
+    `).join('');
+  })();
+</script>
+<script src="partials.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+================================================================
+TORQUE GROUP WEBSITE — DEVELOPER / DEPLOYMENT CHECKLIST
+================================================================
+
+Everything technical: env vars, file paths, deploy steps,
+provider accounts.
+
+----------------------------------------------------------------
+1. RESEND (transactional email)
+----------------------------------------------------------------
+
+[ ] Sign up at https://resend.com
+    Account email: ____________________________________________
+
+[ ] Verify torquegroup.com (or whatever the final domain is)
+    Resend dashboard -> Domains -> Add Domain
+    Add the 3 DNS records they provide (SPF, DKIM, MX). Verification
+    usually takes <10 min after DNS propagates.
+
+[ ] Until the real domain is verified, use Resend's sandbox sender:
+    MAIL_FROM=onboarding@resend.dev
+    Note: sandbox can only send TO the Resend account owner email.
+
+[ ] Generate an API key
+    Resend dashboard -> API Keys -> Create
+    Permission: "Sending access" only.
+    Paste into Vercel as RESEND_API_KEY.
+
+
+----------------------------------------------------------------
+2. ENVIRONMENT VARIABLES (set in Vercel project settings)
+----------------------------------------------------------------
+
+Production + Preview both need every var below.
+
+[ ] RESEND_API_KEY          re_xxxxxxxxxxxxxxxx
+[ ] MAIL_FROM               "Torque Group <noreply@torquegroup.com>"
+                             (use onboarding@resend.dev while testing)
+[ ] MAIL_GROUP              group@torquegroup.com
+[ ] MAIL_INSTITUTE          admissions@torquetechnicsinstitute.com
+[ ] MAIL_CHENNAI            service@torquetechnics.com
+[ ] MAIL_SUBHAGS            sales@subhags.com
+[ ] MAIL_NULITE             safety@nulite.in
+[ ] MAIL_WOLFF              info@armaturen-wolff.de
+[ ] NEXT_PUBLIC_SITE_URL    https://torquegroup.com
+
+Local dev: copy .env.local.example -> .env.local, fill in same values.
+
+
+----------------------------------------------------------------
+3. VERCEL DEPLOYMENT
+----------------------------------------------------------------
+
+[ ] Push the project to a GitHub repo (root or subdirectory)
+[ ] Vercel: New Project -> Import the repo
+    Root directory: website/  (if repo has the website as a sub-folder)
+    Framework preset: Next.js  (auto-detected)
+[ ] Add all env vars from Section 2 above (Production + Preview)
+[ ] Deploy. First build ~3 min.
+[ ] Add the production domain in Vercel -> Settings -> Domains
+[ ] Update DNS at the registrar:
+      A     @       76.76.21.21   (Vercel's A record)
+      CNAME www     cname.vercel-dns.com
+[ ] Wait for DNS to propagate (5 min - 24 h depending on TTL)
+[ ] Vercel Analytics: enable in Project Settings -> Analytics
+    (free up to 2,500 events/month on hobby plan)
+
+
+----------------------------------------------------------------
+4. ASSET FILE PATHS (drop files in these exact locations)
+----------------------------------------------------------------
+
+All paths are relative to website/public/
+
+LOGOS:
+  logos/torque-group.svg              (master logo)
+  logos/institute.svg
+  logos/chennai.svg
+  logos/subhags.svg
+  logos/nulite.svg
+  logos/wolff.svg
+  favicon.ico                          (root of public/)
+  icon.png                             (192x192, root of public/)
+
+TEAM PHOTOS:
+  images/team/founder.jpg              (square or 4:5, min 800x800)
+  images/team/operations.jpg
+
+HERO + COMPANY PHOTOS  (landscape, min 1600px wide, JPEG <300KB):
+  images/hero.jpg
+  images/companies/institute.jpg
+  images/companies/chennai.jpg
+  images/companies/subhags.jpg
+  images/companies/nulite.jpg
+  images/companies/wolff.jpg
+
+INFRASTRUCTURE PHOTOS:
+  images/infrastructure/mumbai-workshop.jpg
+  images/infrastructure/pune-factory.jpg
+  images/infrastructure/chennai-hyd.jpg
+  images/infrastructure/hamburg-valve.jpg
+
+CLIENT LOGOS (240x160 PNG transparent, up to 12):
+  clients/01.png
+  clients/02.png
+  ...
+  clients/12.png
+
+OPEN GRAPH SHARE IMAGES (1200x630 JPEG):
+  og/home.jpg
+  og/about.jpg
+  og/companies.jpg
+  og/infrastructure.jpg
+  og/industries.jpg
+  og/contact.jpg
+
+The site's ImageOrPlaceholder component renders a clean grid
+placeholder if any file is missing — nothing breaks visually.
+
+
+----------------------------------------------------------------
+5. COPY EDITS (single source of truth)
+----------------------------------------------------------------
+
+All copy lives in:  website/content/index.ts
+
+To change a string, edit it there and push to GitHub. Vercel
+auto-deploys. There is no CMS for this v1.
+
+Highest-impact fields:
+  - brand.group.email / phone / address
+  - companies.<id>.email / phone / website
+  - about.leadership.members[].name / title / bio / photo
+  - about.milestones.items[].year / title / desc
+
+
+----------------------------------------------------------------
+6. INQUIRY FORM — TESTING WITHOUT A VERIFIED DOMAIN
+----------------------------------------------------------------
+
+For pre-launch QA before torquegroup.com is verified in Resend:
+
+[ ] Set MAIL_FROM=onboarding@resend.dev in .env.local
+[ ] Set ALL company inboxes + MAIL_GROUP to your own email
+    (the one that owns the Resend account — sandbox restriction)
+[ ] Submit the form on http://localhost:3000/contact
+[ ] You should receive 2 emails:
+      1. The "New inquiry" notification (would go to company + group)
+      2. The auto-reply (would go to whoever filled the form)
+
+When the real domain is verified, swap MAIL_FROM back to
+"Torque Group <noreply@torquegroup.com>" and put the real company
+inboxes into MAIL_INSTITUTE etc.
+
+
+----------------------------------------------------------------
+7. RATE LIMITING
+----------------------------------------------------------------
+
+Current implementation: in-memory Map, 5 submissions per IP per
+hour per warm serverless instance.
+
+[ ] Adequate for marketing-site abuse expectations? YES (default)
+[ ] If abuse becomes real, swap to Upstash Redis:
+      lib/rate-limit.ts is the only file to change
+      Add UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN
+      to Vercel env. Free tier handles plenty.
+
+
+----------------------------------------------------------------
+8. SEO + ANALYTICS
+----------------------------------------------------------------
+
+[ ] Sitemap auto-generated at /sitemap.xml
+[ ] robots.txt auto-generated at /robots.txt
+[ ] JSON-LD (Organization + BreadcrumbList) embedded per route
+[ ] Per-route metadata pulls from content/index.ts -> seo[]
+[ ] Vercel Analytics enabled (no GA, no cookie banner)
+[ ] Submit /sitemap.xml to Google Search Console after launch
+
+
+----------------------------------------------------------------
+9. POST-LAUNCH MAINTENANCE
+----------------------------------------------------------------
+
+[ ] Replace placeholder images as the client supplies them
+    (drop the file, push, Vercel rebuilds)
+[ ] Edit content/index.ts for any copy changes
+[ ] Swap email destinations via Vercel env vars (no redeploy
+    needed — just "Redeploy" button)
+[ ] Monitor Resend dashboard for delivery failures
+[ ] Monitor Vercel Analytics for traffic + Core Web Vitals
+[ ] Run npm outdated quarterly, apply patch upgrades
+
+
+----------------------------------------------------------------
+10. LOCAL DEV TROUBLESHOOTING
+----------------------------------------------------------------
+
+[ ] OneDrive ENOENT cache crashes:
+      Already mitigated via next.config.mjs (cache: false in dev).
+      Permanent fix: move repo out of OneDrive into c:/dev/.
+
+[ ] Dev server slow:
+      First compile per route is ~3s; subsequent loads ~200ms.
+      Production builds (npm run build && npm start) are instant.
+
+[ ] Form not sending in local dev:
+      Confirm RESEND_API_KEY is in .env.local (not just example file).
+      Check terminal for "Inquiry send failed:" errors.
+
+[ ] Port 3000 busy:
+      Next.js falls back to 3001 automatically. Or run:
+      npx kill-port 3000
+
+================================================================

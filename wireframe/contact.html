@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contact — Torque Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="contact.html">
+
+<section class="page-head">
+  <div class="container">
+    <div class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; <span>Contact</span></div>
+    <span class="eyebrow">ENTERPRISE INQUIRY DESK</span>
+    <h1 style="margin-top:14px; max-width:880px;">Route your inquiry to the right company.</h1>
+    <p style="max-width:680px;">Select the relevant company below. Your request is forwarded to the responsible engineering desk within one business day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <!-- Step 1: pick a company -->
+    <div class="section-head reveal" style="margin-bottom:18px;">
+      <div class="text">
+        <span class="eyebrow">STEP 01 · CHOOSE COMPANY</span>
+        <h2 style="margin-top:6px;">Which company should we route to?</h2>
+      </div>
+    </div>
+
+    <div class="div-pick reveal" style="grid-template-columns:repeat(5,1fr);">
+      <div class="pick active" data-target="institute">
+        <small>CO · 01</small>Torque Technics Institute
+        <span class="pick-sub">Marine training · Mumbai</span>
+      </div>
+      <div class="pick" data-target="chennai">
+        <small>CO · 02</small>TT Chennai
+        <span class="pick-sub">Hydraulic repair · Chennai</span>
+      </div>
+      <div class="pick" data-target="subhags">
+        <small>CO · 03</small>Subhags Engineers
+        <span class="pick-sub">Pump mfg · Pune</span>
+      </div>
+      <div class="pick" data-target="nulite">
+        <small>CO · 04</small>Nulite
+        <span class="pick-sub">Safety systems</span>
+      </div>
+      <div class="pick" data-target="wolff">
+        <small>CO · 05</small>Armaturen-Wolff
+        <span class="pick-sub">Valves · Hamburg</span>
+      </div>
+    </div>
+
+    <!-- Active company panel -->
+    <div id="company-detail" class="reveal" style="margin-top:24px;">
+      <div class="cd" data-co="institute">
+        <div class="cd-grid">
+          <div class="cd-info">
+            <span class="eyebrow">CO · 01 · TECHNICAL TRAINING</span>
+            <h3>Torque Technics Institute</h3>
+            <p class="mono">admissions@torquetechnicsinstitute.com</p>
+            <p class="mono">+91 22 0000 0000 · Mumbai, IN</p>
+            <p>Marine technical training — cadet, pre-sea and post-sea programmes with practical workshops and labs.</p>
+            <a href="https://www.torquetechnicsinstitute.com" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">Visit company site →</a>
+          </div>
+        </div>
+      </div>
+      <div class="cd" data-co="chennai" hidden>
+        <div class="cd-grid">
+          <div class="cd-info">
+            <span class="eyebrow">CO · 02 · MARINE REPAIR</span>
+            <h3>Torque Technics Chennai</h3>
+            <p class="mono">service@torquetechnics.com</p>
+            <p class="mono">+91 44 0000 0000 · Chennai, IN</p>
+            <p>Shipboard hydraulic repair workshop — steering gears, hatch covers, deck machinery and power packs.</p>
+            <a href="https://www.torquetechnics.com" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">Visit company site →</a>
+          </div>
+        </div>
+      </div>
+      <div class="cd" data-co="subhags" hidden>
+        <div class="cd-grid">
+          <div class="cd-info">
+            <span class="eyebrow">CO · 03 · MANUFACTURING</span>
+            <h3>Subhags Engineers</h3>
+            <p class="mono">sales@subhags.com</p>
+            <p class="mono">+91 20 0000 0000 · Pune, IN</p>
+            <p>Marine & industrial pump manufacturing — pumps, spares and complete pumping systems.</p>
+            <a href="https://www.subhags.com" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">Visit company site →</a>
+          </div>
+        </div>
+      </div>
+      <div class="cd" data-co="nulite" hidden>
+        <div class="cd-grid">
+          <div class="cd-info">
+            <span class="eyebrow">CO · 04 · MARINE SAFETY</span>
+            <h3>Nulite</h3>
+            <p class="mono">safety@nulite.in</p>
+            <p class="mono">India</p>
+            <p>IMO signages and shipboard safety systems for new-build, retrofit and dry-dock campaigns.</p>
+            <a href="https://www.nulite.in" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">Visit company site →</a>
+          </div>
+        </div>
+      </div>
+      <div class="cd" data-co="wolff" hidden>
+        <div class="cd-grid">
+          <div class="cd-info">
+            <span class="eyebrow">CO · 05 · VALVE ENGINEERING</span>
+            <h3>Armaturen-Wolff LLP</h3>
+            <p class="mono">info@armaturen-wolff.de</p>
+            <p class="mono">Hamburg, Germany</p>
+            <p>German maritime valve engineering and precision flow-control systems for shipbuilding and offshore.</p>
+            <a href="https://www.armaturen-wolff.de" target="_blank" rel="noopener" class="btn btn-sm btn-ghost">Visit company site →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: form -->
+    <div class="section-head reveal" style="margin-top:44px; margin-bottom:18px;">
+      <div class="text">
+        <span class="eyebrow">STEP 02 · YOUR INQUIRY</span>
+        <h2 style="margin-top:6px;">Send us the details</h2>
+      </div>
+    </div>
+
+    <form class="inquiry reveal" id="inquiry-form">
+      <div class="field-row">
+        <div class="field">
+          <label>Contact Name</label>
+          <input type="text" placeholder="Full name" />
+        </div>
+        <div class="field">
+          <label>Company</label>
+          <input type="text" placeholder="Company / Operator" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="name@company.com" />
+        </div>
+        <div class="field">
+          <label>Phone</label>
+          <input type="text" placeholder="+91 / +49 …" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Inquiry Details</label>
+        <textarea placeholder="Vessel / plant, machinery, specs, scope of work, location and timeline…"></textarea>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+        <span class="muted" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase;">Response · within 24 hrs</span>
+        <button type="submit" class="btn btn-accent">Submit Inquiry
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </form>
+
+    <!-- Group office footer block -->
+    <div class="contact-foot reveal">
+      <div class="block">
+        <h4>Group head office</h4>
+        <p class="mono">TORQUE GROUP · PUNE · IN</p>
+        <p>Plot 00, MIDC Industrial Estate, Pune 411 000, India</p>
+        <p class="mono">+91 20 0000 0000 · group@torquegroup.com</p>
+      </div>
+      <div class="block">
+        <h4>Marine service desk</h4>
+        <p class="mono">24 / 7 SHIPBOARD RESPONSE</p>
+        <p>For urgent shipboard hydraulic or service callouts, contact TT Chennai directly.</p>
+        <p class="mono">service@torquetechnics.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="partials.js"></script>
+</body>
+</html>

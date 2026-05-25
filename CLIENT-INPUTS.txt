@@ -1,0 +1,219 @@
+================================================================
+TORQUE GROUP WEBSITE — INFORMATION WE NEED FROM YOU
+================================================================
+
+Please fill in the blanks below and send back. Items marked
+[REQUIRED] must be confirmed before the site goes live. Items
+marked [OPTIONAL] use clean placeholders if not provided, so the
+site still looks professional without them.
+
+
+----------------------------------------------------------------
+1. EMAIL ADDRESSES  [REQUIRED]
+----------------------------------------------------------------
+
+The contact form on the website routes each inquiry to the
+relevant company, with the group desk on CC. Please confirm or
+correct each address.
+
+[ ] Group desk (CC'd on every inquiry):
+    ____________________________________________
+
+[ ] Torque Technics Institute (Mumbai):
+    ____________________________________________
+
+[ ] Torque Technics Chennai:
+    ____________________________________________
+
+[ ] Subhags Engineers (Pune):
+    ____________________________________________
+
+[ ] Nulite:
+    ____________________________________________
+
+[ ] Armaturen-Wolff LLP (Hamburg):
+    ____________________________________________
+
+[ ] Public contact email shown in the footer:
+    ____________________________________________
+
+
+----------------------------------------------------------------
+2. PHONE NUMBERS  [REQUIRED]
+----------------------------------------------------------------
+
+All phone numbers on the site are currently placeholders
+("+91 XX 0000 0000"). Please provide the real numbers.
+
+[ ] Group head office (Pune):           _______________________
+[ ] Public footer contact phone:        _______________________
+[ ] Torque Technics Institute, Mumbai:  _______________________
+[ ] Torque Technics Chennai:            _______________________
+[ ] Subhags Engineers, Pune:            _______________________
+[ ] Nulite:                             _______________________
+[ ] Armaturen-Wolff, Hamburg:           _______________________
+
+
+----------------------------------------------------------------
+3. PHYSICAL ADDRESS  [REQUIRED]
+----------------------------------------------------------------
+
+Group head office full street address:
+
+_________________________________________________________________
+_________________________________________________________________
+_________________________________________________________________
+
+
+----------------------------------------------------------------
+4. LEADERSHIP TEAM  [REQUIRED]
+----------------------------------------------------------------
+
+Two leadership profiles appear on the About page. For each, we
+need a real name, title, short bio (50-80 words), and a portrait
+photograph (square or 4:5 portrait, at least 800x800 pixels).
+
+[ ] FOUNDER / MANAGING DIRECTOR
+    Full name:  ___________________________________________
+    Job title:  ___________________________________________
+    Bio:        ___________________________________________
+                ___________________________________________
+                ___________________________________________
+    Portrait photo:  attached as founder.jpg
+
+[ ] DIRECTOR — OPERATIONS
+    Full name:  ___________________________________________
+    Job title:  ___________________________________________
+    Bio:        ___________________________________________
+                ___________________________________________
+                ___________________________________________
+    Portrait photo:  attached as operations.jpg
+
+
+----------------------------------------------------------------
+5. LOGOS  [STRONGLY RECOMMENDED]
+----------------------------------------------------------------
+
+Please send each logo in vector format (.SVG or .AI), or at
+minimum a high-resolution PNG with a transparent background.
+
+[ ] Torque Group master logo
+[ ] Torque Technics Institute logo
+[ ] Torque Technics Chennai logo
+[ ] Subhags Engineers logo
+[ ] Nulite logo
+[ ] Armaturen-Wolff LLP logo
+[ ] Browser tab icon / favicon (square version of Torque Group mark)
+
+
+----------------------------------------------------------------
+6. PHOTOGRAPHY  [RECOMMENDED]
+----------------------------------------------------------------
+
+Real photographs from your workshops, factories, and shipboard
+work will make the site much stronger than stock imagery.
+Landscape orientation, at least 1600 pixels wide, JPEG.
+
+[ ] Hero photo for the home page top
+    Subject: marine main engine overhaul at Mumbai workshop
+
+[ ] One photo per group company:
+    [ ] Torque Technics Institute    (cadets in workshop / simulator)
+    [ ] Torque Technics Chennai      (hydraulic repair, deck machinery)
+    [ ] Subhags Engineers            (pump manufacturing floor)
+    [ ] Nulite                       (IMO signage, safety system)
+    [ ] Armaturen-Wolff              (precision valve, German workshop)
+
+[ ] One photo per facility (for the Infrastructure page):
+    [ ] Mumbai training workshop
+    [ ] Pune pump factory
+    [ ] Chennai hydraulics workshop
+    [ ] Hamburg valve workshop
+
+If a real photo isn't available for any of these, please tell us
+and we'll keep a tasteful placeholder graphic.
+
+
+----------------------------------------------------------------
+7. CLIENT LOGOS  [OPTIONAL]
+----------------------------------------------------------------
+
+The home page reserves a 12-slot grid for client / customer
+logos. Without these, each slot shows a placeholder label.
+
+[ ] Please list which clients you'd like featured (up to 12):
+    1.  _____________________________________________________
+    2.  _____________________________________________________
+    3.  _____________________________________________________
+    4.  _____________________________________________________
+    5.  _____________________________________________________
+    6.  _____________________________________________________
+    7.  _____________________________________________________
+    8.  _____________________________________________________
+    9.  _____________________________________________________
+    10. _____________________________________________________
+    11. _____________________________________________________
+    12. _____________________________________________________
+
+[ ] Logo file for each (PNG with transparent background).
+
+If you don't have 12, we can shrink the grid to the number you
+have — just tell us.
+
+
+----------------------------------------------------------------
+8. DOMAIN NAME  [REQUIRED FOR LAUNCH]
+----------------------------------------------------------------
+
+[ ] Confirm the website domain:
+    Default we've assumed:  torquegroup.com
+    Correct domain:         _________________________________
+
+[ ] Who manages your domain / DNS records?
+    Name / IT contact:      _________________________________
+
+
+----------------------------------------------------------------
+9. CONTENT TO REVIEW  [OPTIONAL]
+----------------------------------------------------------------
+
+We've written all the copy on the site based on the brief.
+Please skim and flag anything you want changed:
+
+[ ] Home page hero text + the headline stats (28+ years, 5
+    companies, 4 cities)
+[ ] About page leadership bios
+[ ] Milestones timeline (1991, 2001, 2008, 2018, 2022) — confirm
+    each year and event
+[ ] Each company's spec sheet (programmes, capacity, approvals)
+[ ] Infrastructure metrics (12,000+ m², 22 workshop bays, 6
+    training labs)
+[ ] Industries matrix — which company serves which sector
+[ ] Certifications list in the footer (ISO 9001, IRS, IACS, IMO,
+    DIN, DGS)
+
+
+----------------------------------------------------------------
+10. SOCIAL MEDIA  [OPTIONAL]
+----------------------------------------------------------------
+
+[ ] LinkedIn page URL: _________________________________________
+[ ] Any other channels: _______________________________________
+
+
+================================================================
+MINIMUM REQUIRED TO GO LIVE
+================================================================
+
+If you're short on time, the bare-minimum items for launch are:
+
+  1.  Email addresses (Section 1)
+  2.  Phone numbers (Section 2)
+  3.  Head office address (Section 3)
+  4.  Two leadership names + bios + portraits (Section 4)
+  5.  Confirmed domain (Section 8)
+
+Everything else — logos, photography, client logos — can be
+added later without taking the site offline.
+
+================================================================
