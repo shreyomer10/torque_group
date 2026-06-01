@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { seo, seoKeywordsGlobal, brand } from "@/content";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://torquegroupcompanies.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.torquegroupcompanies.com";
 
 export function buildMetadata(route: string): Metadata {
   const entry = seo[route] ?? seo["/"];
