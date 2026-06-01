@@ -11,10 +11,10 @@ import { companies, contact, type CompanyId } from "@/content";
 const BREVO_API = "https://api.brevo.com/v3/smtp/email";
 const BREVO_KEY = process.env.BREVO_API_KEY;
 
-const FROM_EMAIL = process.env.MAIL_FROM_EMAIL ?? "noreply@torquegroup.com";
+const FROM_EMAIL = process.env.MAIL_FROM_EMAIL ?? "noreply@torquegroupcompanies.com";
 const FROM_NAME = process.env.MAIL_FROM_NAME ?? "Torque Group";
 
-export const GROUP_INBOX = process.env.MAIL_GROUP ?? "group@torquegroup.com";
+export const GROUP_INBOX = process.env.MAIL_GROUP ?? "sepl@subhagmail.com";
 
 export const RECIPIENTS: Record<CompanyId, string> = {
   institute: process.env.MAIL_INSTITUTE ?? companies.institute.email,
@@ -104,7 +104,7 @@ function autoReplyHtml(input: { name: string; companyName: string }) {
           <div style="font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-top:4px;">Inquiry received</div>
         </td></tr>
         <tr><td style="padding:28px;font-size:14px;line-height:1.6;color:#3a4150;">${tpl}</td></tr>
-        <tr><td style="padding:18px 28px;background:#eeece6;font-size:11px;letter-spacing:.14em;color:#6b7280;text-transform:uppercase;">Maritime &middot; Engineering &middot; Since 1991</td></tr>
+        <tr><td style="padding:18px 28px;background:#eeece6;font-size:11px;letter-spacing:.14em;color:#6b7280;text-transform:uppercase;">Maritime &middot; Engineering &middot; Since 1998</td></tr>
       </table>
     </td></tr>
   </table>
@@ -125,7 +125,6 @@ export async function sendInquiry(input: {
   const notification: BrevoPayload = {
     sender: { name: FROM_NAME, email: FROM_EMAIL },
     to: [{ email: to, name: co.name }],
-    cc: [{ email: GROUP_INBOX }],
     replyTo: { email: input.email, name: input.name },
     subject: `New inquiry — ${co.name}`,
     htmlContent: notificationHtml({

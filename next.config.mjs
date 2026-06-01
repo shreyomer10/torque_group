@@ -17,6 +17,19 @@ const nextConfig = {
     }
     return config;
   },
+  // Force the bare (non-www) domain as canonical. Any request to the
+  // www host is 308-redirected to the apex domain so Google indexes
+  // a single URL. Keep this in sync with NEXT_PUBLIC_SITE_URL.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.torquegroupcompanies.com" }],
+        destination: "https://torquegroupcompanies.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

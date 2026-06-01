@@ -14,6 +14,19 @@
  *     ?co= query param. Do not rename without a redirect.
  */
 
+// Client logo roster (home-page marquee). Kept in its own file for clarity.
+export { clientLogos, type ClientLogo } from "./clients";
+
+// Infrastructure photo galleries (per-location albums + carousel).
+export {
+  galleries,
+  galleryOrder,
+  carouselPhotos,
+  type Gallery,
+  type GalleryPhoto,
+  type GalleryLocation,
+} from "./infrastructure-gallery";
+
 // ---------------------------------------------------------------------------
 // TYPES
 // ---------------------------------------------------------------------------
@@ -42,6 +55,7 @@ export interface Company {
   website: string;
   email: string;
   phone: string;
+  address: string;          // postal address for contact / map enquiry
   picker: { line1: string; line2: string }; // contact picker tile
   seoKeywords: string[];
 }
@@ -53,21 +67,21 @@ export interface Company {
 export const brand = {
   name: "Torque Group",
   shortName: "TORQUE GROUP",
-  sub: "Maritime · Engineering · Since 1991",
-  tagline: "Engineering Maritime Excellence Since 1991",
-  established: 1991,
-  yearsLegacy: "28+",
+  sub: "Maritime · Engineering · Since 1998",
+  tagline: "Engineering Maritime Excellence Since 1998",
+  established: 1998,
+  yearsLegacy: "25+",
   countries: ["India", "Germany"] as const,
   cities: ["Pune", "Mumbai", "Chennai", "Hamburg"] as const,
   companyCount: 5,
   group: {
-    email: "group@torquegroup.com",
-    phone: "+91 20 0000 0000",
-    address: "Plot 00, MIDC Industrial Estate, Pune 411 000, India",
+    email: "pune@torquetechnic.com",
+    phone: "+91 99224 40667",
+    address: "Plot No. 34, Poona Small Scale Industrial Estate, Gultekdi, Pune – 411 037, India",
   },
   contact: {
-    email: "contact@torquegroup.com",
-    phone: "+91 22 0000 0000",
+    email: "pune@torquetechnic.com",
+    phone: "+91 99224 40667",
   },
   languages: ["EN", "DE", "HI", "TA", "MR"] as const,
 } as const;
@@ -118,8 +132,9 @@ export const companies: Record<CompanyId, Company> = {
       { label: "CADETS / YR", value: "500+" },
     ],
     website: "https://www.torquetechnicsinstitute.com",
-    email: "admissions@torquetechnicsinstitute.com",
-    phone: "+91 22 0000 0000",
+    email: "pune@torquetechnic.com",
+    phone: "",
+    address: "Office No. 114, Sharad Industrial Estate, Lake Rd, opp. Maruti Service Center, Bhandup West, Mumbai, Maharashtra 400078",
     picker: { line1: "Torque Technics Institute", line2: "Marine training · Mumbai" },
     seoKeywords: [
       "marine technical training Mumbai",
@@ -139,11 +154,11 @@ export const companies: Record<CompanyId, Company> = {
     country: "IN",
     blurb: "Shipboard hydraulic repair workshop and marine maintenance.",
     body:
-      "Workshop-heavy marine maintenance company focused on shipboard hydraulic system repair — steering gears, hatch covers, deck machinery, cranes and hydraulic power packs. Field engineers operate across Indian ports.",
+      "Workshop-heavy marine maintenance company focused on shipboard hydraulic system repair — steering gears, hatch covers, deck machinery, cranes and hydraulic power packs. Field engineers operate across the globe.",
     spec: [
       { label: "Capability", value: "HYDRAULIC REPAIR · DECK MACHINERY" },
       { label: "Service",    value: "WORKSHOP + SHIPBOARD" },
-      { label: "Coverage",   value: "INDIAN PORTS" },
+      { label: "Coverage",   value: "ACROSS THE GLOBE" },
       { label: "Location",   value: "CHENNAI · IN" },
     ],
     chips: [
@@ -152,8 +167,9 @@ export const companies: Record<CompanyId, Company> = {
       { label: "RESPONSE", value: "24 / 7" },
     ],
     website: "https://www.torquetechnics.com",
-    email: "service@torquetechnics.com",
-    phone: "+91 44 0000 0000",
+    email: "info@torquetechnics.com",
+    phone: "+91 44 2525 2555",
+    address: "37/20, 3rd Lane, North Beach Road, Chennai – 600 001",
     picker: { line1: "TT Chennai", line2: "Hydraulic repair · Chennai" },
     seoKeywords: [
       "shipboard hydraulic repair Chennai",
@@ -166,14 +182,14 @@ export const companies: Record<CompanyId, Company> = {
     order: 3,
     code: "CO · 03",
     discipline: "MANUFACTURING",
-    name: "Subhags Engineers",
-    shortName: "Subhags Engineers",
+    name: "Subhag Engineers Pvt. Ltd.",
+    shortName: "Subhag Engineers",
     role: "Marine & Industrial Pump Manufacturing · Pune",
     city: "Pune",
     country: "IN",
     blurb: "Marine & industrial pump manufacturing, spares and systems.",
     body:
-      "Subhags engineers, manufactures and supplies marine and industrial pumps, spares and complete pumping systems. The company operates an in-house machining, assembly and pressure-testing facility serving shipyards, port operators and industrial plants.",
+      "Subhag Engineers Pvt. Ltd. engineers, manufactures and supplies marine and industrial pumps, spares and complete pumping systems. The company operates an in-house machining, assembly and pressure-testing facility serving shipyards, port operators and industrial plants.",
     spec: [
       { label: "Capability", value: "PUMP MFG · SPARES · SYSTEMS" },
       { label: "Sector",     value: "MARINE · INDUSTRIAL" },
@@ -182,14 +198,15 @@ export const companies: Record<CompanyId, Company> = {
       { label: "Location",   value: "PUNE · IN" },
     ],
     chips: [
-      { label: "FOUNDED", value: "1991" },
+      { label: "FOUNDED", value: "1998" },
       { label: "FOCUS",   value: "Marine Pumps" },
       { label: "SUPPLY",  value: "40+ Yards" },
     ],
     website: "https://www.subhags.com",
-    email: "sales@subhags.com",
-    phone: "+91 20 0000 0000",
-    picker: { line1: "Subhags Engineers", line2: "Pump mfg · Pune" },
+    email: "sepl@subhagmail.com",
+    phone: "+91 20 2426 1679",
+    address: "Gat No. 64, Sasewadi, Tal.: Bhor, Dist.: Pune – 412 205",
+    picker: { line1: "Subhag Engineers", line2: "Pump mfg · Pune" },
     seoKeywords: [
       "marine pump manufacturer India",
       "ISO 9001 IRS pump factory Pune",
@@ -221,8 +238,9 @@ export const companies: Record<CompanyId, Company> = {
       { label: "SCOPE",    value: "Shipboard" },
     ],
     website: "https://www.nulite.in",
-    email: "safety@nulite.in",
-    phone: "",
+    email: "mail@nulite.co.in",
+    phone: "+91 20 2426 1679",
+    address: "Plot No. 34, Poona Small Scale Industrial Estate, Gultekdi, Pune – 411 037",
     picker: { line1: "Nulite", line2: "Safety systems" },
     seoKeywords: [
       "IMO signage manufacturer",
@@ -256,8 +274,9 @@ export const companies: Record<CompanyId, Company> = {
       { label: "OUTPUT",    value: "Marine Valves" },
     ],
     website: "https://www.armaturen-wolff.de",
-    email: "info@armaturen-wolff.de",
-    phone: "",
+    email: "awllp@awllpindia.com",
+    phone: "+49 40 532 873-0",
+    address: "Oehleckerring 29, 22419 Hamburg, Germany",
     picker: { line1: "Armaturen-Wolff", line2: "Valves · Hamburg" },
     seoKeywords: [
       "marine valve manufacturer Germany",
@@ -277,8 +296,8 @@ export const companyOrder: CompanyId[] = [
 
 export const home = {
   hero: {
-    eyebrow: "TORQUE GROUP · EST. 1991",
-    h1: "Engineering Maritime Excellence Since 1991",
+    eyebrow: "TORQUE GROUP · EST. 1998",
+    h1: "Engineering Maritime Excellence Since 1998",
     lede: "MANUFACTURING · MARINE SERVICES · TECHNICAL TRAINING · INDUSTRIAL SOLUTIONS",
     body:
       "A multi-company maritime engineering holding group operating manufacturing infrastructure, marine repair workshops, technical training systems and industrial engineering services across India and Germany.",
@@ -287,7 +306,7 @@ export const home = {
       { label: "Contact Us",              href: "/contact"   },
     ] satisfies CTA[],
     stats: [
-      { num: "28+", label: "Years Legacy"      },
+      { num: "25+", label: "Years Legacy"      },
       { num: "05",  label: "Group Companies"   },
       { num: "04",  label: "Operational Cities" },
     ],
@@ -304,7 +323,7 @@ export const home = {
       title:   "TORQUE GROUP",
       body:
         "Maritime engineering holding company coordinating manufacturing, marine services, training and industrial systems across five specialised companies.",
-      badges: ["EST · 1991", "IN · DE"],
+      badges: ["EST · 1998", "IN · DE"],
     },
   },
 
@@ -314,7 +333,7 @@ export const home = {
     body:
       "From valve manufacturing in Germany to hydraulic shipboard repair in Chennai — Torque Group delivers end-to-end maritime engineering under one operational umbrella.",
     metrics: [
-      { num: "28+",  label: "Years Legacy", desc: "Three decades of maritime engineering operations." },
+      { num: "25+",  label: "Years Legacy", desc: "Over two decades of maritime engineering operations." },
       { num: "05",   label: "Companies",    desc: "Specialised engineering companies under one group." },
       { num: "02",   label: "Countries",    desc: "India and Germany operational footprint." },
       { num: "12K+", label: "M² Workshops", desc: "Combined workshop, factory and training area." },
@@ -334,14 +353,13 @@ export const home = {
     h2: "Trusted by shipyards, fleet operators and industrial plants",
     body:
       "A working roster of marine, shipbuilding, offshore and industrial customers across India and overseas.",
-    slots: 12,
   },
 
   global: {
     eyebrow: "GLOBAL PRESENCE",
     h2: "Operational across India and Germany",
     offices: [
-      { code: "CO · 03", city: "Pune · India",       desc: "Group head office and Subhags pump manufacturing facility." },
+      { code: "CO · 03", city: "Pune · India",       desc: "Group head office and Subhag Engineers pump manufacturing facility." },
       { code: "CO · 01", city: "Mumbai · India",     desc: "Torque Technics Institute — marine technical training infrastructure." },
       { code: "CO · 02", city: "Chennai · India",    desc: "Torque Technics Chennai — shipboard hydraulic repair workshop." },
       { code: "CO · 05", city: "Hamburg · Germany",  desc: "Armaturen-Wolff LLP — maritime valve engineering operations." },
@@ -379,24 +397,26 @@ export const about = {
   leadership: {
     eyebrow: "LEADERSHIP",
     h2: "The people behind the group",
-    body:
-      "Engineer-led leadership. Decades of operational maritime experience guiding every company under the Torque Group umbrella.",
     members: [
       {
-        role: "FOUNDER · MANAGING DIRECTOR",
-        name: "Name Surname",
-        title: "Group Managing Director",
+        role: "CO-FOUNDER · CHIEF ENGINEER (MEO CLASS-I)",
+        name: "Mr. Sanjeev Ogale",
+        title: "Co-founder · Director",
+        summary:
+          "Marine Engineer Officer Class I and ISO 9001:2015 Lead Auditor.",
         bio:
-          "Founder of Torque Group with over three decades of maritime engineering experience. Drives the group's engineering-first culture and oversees strategy across manufacturing, marine services and training.",
-        photo: "/images/team/founder.jpg",
+          "Marine Engineer Officer Class I (Ch. Engr.) and ISO 9001:2015 Lead Auditor with sea service from 1983 to 2000. Co-founder of the group, leading marine training, dredger technical management and IMO-compliant marine equipment. Government-licensed surveyor and long-serving Chairman of the Institute of Marine Engineers, Pune Branch.",
+        photo: "/images/team/sanjeev-ogale.webp",
       },
       {
-        role: "DIRECTOR · OPERATIONS",
-        name: "Name Surname",
-        title: "Director, Group Operations",
+        role: "CO-FOUNDER · CHIEF ENGINEER (MEO CLASS-I)",
+        name: "Mr. Girish Kotwal",
+        title: "Co-founder · Director",
+        summary:
+          "Chief Engineer Marine with shore experience managing international tanker fleets.",
         bio:
-          "Leads day-to-day operations across the group's manufacturing, workshop and training infrastructure. Coordinates engineering execution between the Indian and German entities.",
-        photo: "/images/team/operations.jpg",
+          "Chief Engineer Marine (MEO Class-I) with shore-based experience as Technical Manager and Superintendent managing tanker fleets for international owners. Drives the group's technical management, marine training and the manufacture of pumps, valves and shipboard safety systems.",
+        photo: "/images/team/girish-kotwal.webp",
       },
     ],
   },
@@ -408,7 +428,7 @@ export const about = {
       "The group was founded on a single discipline — building, repairing and operating the mechanical systems that move ships. Every company retains that engineering-first culture: drawings on the wall, tools in hand, machines on the floor.",
       "Decisions are taken in workshops, not boardrooms. Specifications are tightened on the bench. The work proves itself when the vessel returns to service.",
     ],
-    badges: ["EST · 1991", "FAMILY-RUN", "ENGINEER-LED", "CLASS-ALIGNED"],
+    badges: ["EST · 1998", "FAMILY-RUN", "ENGINEER-LED", "CLASS-ALIGNED"],
   },
 
   visionMission: {
@@ -419,12 +439,12 @@ export const about = {
   },
 
   milestones: {
-    eyebrow: "MILESTONES · 1991 — 2026",
+    eyebrow: "MILESTONES · 1998 — 2026",
     h2: "Group evolution",
     items: [
-      { year: "1991", title: "Subhags Engineers founded",        desc: "Marine pump manufacturing operation established in Pune." },
+      { year: "1998", title: "Subhag Engineers founded",          desc: "Marine pump manufacturing operation established in Pune." },
       { year: "2001", title: "Torque Technics Institute — Mumbai", desc: "Marine technical training centre opens with practical workshops and labs." },
-      { year: "2008", title: "Torque Technics Chennai",          desc: "Shipboard hydraulic repair workshop commissioned in Chennai." },
+      { year: "2012", title: "Torque Technics Chennai",           desc: "Shipboard hydraulic repair workshop commissioned in Chennai." },
       { year: "2018", title: "Nulite — Marine Safety Systems",    desc: "IMO signage and shipboard safety products company added to the group." },
       { year: "2022", title: "Armaturen-Wolff LLP · Germany",    desc: "German maritime valve engineering capability integrated under the group umbrella." },
     ],
@@ -499,13 +519,15 @@ export const infrastructure = {
       h4:     "Torque Technics Institute — practical workshops",
       desc:   "Turbocharger overhaul, purifier systems, marine pumps, hydraulic and engine-room practical bays.",
       image:  "bg-workshop",
+      galleryImage: "/images/infrastructure/mumbai/mumbai-01-thumb.webp",
+      galleryHref:  "/infrastructure/gallery/mumbai",
     },
     {
       id: "pune-factory",
       size: "medium",
       corner: "FACILITY · 02 · PUNE",
       tag:    "MANUFACTURING",
-      h4:     "Subhags pump factory",
+      h4:     "Subhag Engineers pump factory",
       desc:   "Machining, assembly and pressure-test cells for marine and industrial pump systems.",
       image:  "bg-factory",
     },
@@ -517,6 +539,8 @@ export const infrastructure = {
       h4:     "Shipboard hydraulics workshop",
       desc:   "Cylinder, valve-block, power-pack and deck-machinery overhaul lines.",
       image:  "bg-hyd",
+      galleryImage: "/images/infrastructure/chennai/workshop-thumb.webp",
+      galleryHref:  "/infrastructure/gallery/chennai",
     },
     {
       id: "hamburg-valve",
@@ -524,7 +548,7 @@ export const infrastructure = {
       corner: "FACILITY · 04 · HAMBURG",
       tag:    "VALVE ENGINEERING",
       h4:     "Armaturen-Wolff workshop",
-      desc:   "",
+      desc:   "Precision valve machining, assembly and flow-control test benches built to German maritime standards.",
       image:  "bg-valve",
     },
   ],
@@ -533,11 +557,11 @@ export const infrastructure = {
     h2: "Selected workshop & lab equipment",
     rows: [
       { equipment: "Turbocharger overhaul bay", company: "Institute",   location: "Mumbai",  use: "Training / Service" },
-      { equipment: "Marine pump test rig",      company: "Subhags",     location: "Pune",    use: "Pressure / Flow Test" },
+      { equipment: "Marine pump test rig",      company: "Subhag",     location: "Pune",    use: "Pressure / Flow Test" },
       { equipment: "Purifier overhaul workshop", company: "Institute",  location: "Mumbai",  use: "Training" },
       { equipment: "Hydraulic cylinder honing", company: "TT Chennai",  location: "Chennai", use: "Repair" },
       { equipment: "Engine-room simulator",     company: "Institute",   location: "Mumbai",  use: "Cadet Training" },
-      { equipment: "CNC machining centre",      company: "Subhags",     location: "Pune",    use: "Pump Components" },
+      { equipment: "CNC machining centre",      company: "Subhag",     location: "Pune",    use: "Pump Components" },
       { equipment: "Valve test bench",          company: "Wolff",       location: "Hamburg", use: "QC / Certification" },
     ],
   },
@@ -556,7 +580,7 @@ export const industries = {
       "Output from Torque Group companies reaches merchant fleets, shipbuilders, offshore operators, industrial plants and marine training programmes across India and overseas yards.",
   },
   sectors: [
-    { code: "SECTOR · 01", title: "Marine — Merchant Fleet",     desc: "Pumps, valves, hydraulics and shipboard service for cargo, container and tanker fleets in operation." },
+    { code: "SECTOR · 01", title: "Marine — Merchant Fleet",     desc: "Hydraulic machinery repairs, maintenance, spares, consultancy and shipboard service — with pumps, valves and hydraulics for cargo, container and tanker fleets in operation." },
     { code: "SECTOR · 02", title: "Shipbuilding & Yards",        desc: "New-build supply of valves, pumping systems and IMO signage to Indian and international shipyards." },
     { code: "SECTOR · 03", title: "Offshore & Energy",           desc: "Process valves, hydraulic systems and retrofit engineering for offshore support vessels and platforms." },
     { code: "SECTOR · 04", title: "Industrial Manufacturing",    desc: "Engineered pumping infrastructure and process flow systems for industrial plants and utilities." },
@@ -571,7 +595,7 @@ export const industries = {
     rows: [
       { company: "Torque Technics Institute", cells: [true,  false, false, false, false, true ] },
       { company: "Torque Technics Chennai",   cells: [true,  true,  true,  true,  false, true ] },
-      { company: "Subhags Engineers",         cells: [true,  true,  true,  true,  false, false] },
+      { company: "Subhag Engineers",          cells: [true,  true,  true,  true,  false, false] },
       { company: "Nulite",                    cells: [true,  true,  false, false, true,  false] },
       { company: "Armaturen-Wolff LLP",       cells: [true,  true,  true,  true,  false, false] },
     ],
@@ -582,7 +606,7 @@ export const industries = {
     steps: [
       { code: "FLOW · 01", title: "Specification",   desc: "Customer specs, class society and IMO requirements captured." },
       { code: "FLOW · 02", title: "Engineering",     desc: "Drawings, schematics and BOM produced across companies." },
-      { code: "FLOW · 03", title: "Manufacturing",   desc: "Pumps (Subhags), valves (Wolff), signage (Nulite) sourced in-group." },
+      { code: "FLOW · 03", title: "Manufacturing",   desc: "Pumps (Subhag), valves (Wolff), signage (Nulite) sourced in-group." },
       { code: "FLOW · 04", title: "Execution",       desc: "Workshop fabrication and shipboard installation by TT Chennai field teams." },
       { code: "FLOW · 05", title: "Trials & Handover", desc: "Class survey, IMO compliance check and operational handover." },
     ],
@@ -620,17 +644,18 @@ export const contact = {
     submit:        "Submit Inquiry",
     sending:       "Routing inquiry…",
     success:       "Inquiry routed to {company}. Response within 24 hours.",
-    error:         "We couldn't send your inquiry. Please email us directly at group@torquegroup.com or try again.",
+    error:         "We couldn't send your inquiry. Please email us directly at pune@torquetechnic.com or try again.",
     autoReplySubject: "We've received your inquiry — Torque Group",
-    autoReplyBody:    "Hi {name}, your inquiry has been routed to {company}. Their engineering desk will be in touch within one business day. If urgent, reach the group desk at group@torquegroup.com.",
+    autoReplyBody:    "Hi {name}, your inquiry has been routed to {company}. Their engineering desk will be in touch within one business day. If urgent, reach the group desk at pune@torquetechnic.com.",
   },
   blocks: [
     {
       h4: "Group head office",
       lines: [
         { text: "TORQUE GROUP · PUNE · IN", mono: true },
-        { text: "Plot 00, MIDC Industrial Estate, Pune 411 000, India" },
-        { text: "+91 20 0000 0000 · group@torquegroup.com", mono: true },
+        { text: "Plot No. 34, Poona Small Scale Industrial Estate, Gultekdi, Pune – 411 037, India" },
+        { text: "+91 20 2426 1679 · +91 99224 40667", mono: true },
+        { text: "pune@torquetechnic.com", mono: true },
       ],
     },
     {
@@ -638,7 +663,7 @@ export const contact = {
       lines: [
         { text: "24 / 7 SHIPBOARD RESPONSE", mono: true },
         { text: "For urgent shipboard hydraulic or service callouts, contact TT Chennai directly." },
-        { text: "service@torquetechnics.com", mono: true },
+        { text: "info@torquetechnics.com · +91 44 2525 2555", mono: true },
       ],
     },
   ],
@@ -664,7 +689,7 @@ export const footer = {
   cols: {
     brand: {
       desc:
-        "A maritime engineering holding group operating manufacturing, marine services, technical training and industrial systems across India and Germany since 1991.",
+        "A maritime engineering holding group operating manufacturing, marine services, technical training and industrial systems across India and Germany since 1998.",
     },
     companies: {
       h4: "Companies",
@@ -682,12 +707,18 @@ export const footer = {
     offices: {
       h4: "Offices",
       desc1: "Pune · Mumbai · Chennai · Hamburg\nOperations across 4 cities, 2 countries.",
-      desc2: "+91 22 0000 0000\ncontact@torquegroup.com",
+      desc2: "+91 99224 40667\ninfo@torquetechnics.com",
     },
   },
   bottom: {
     left:  "© 2026 TORQUE GROUP · ALL RIGHTS RESERVED",
     right: "ISO 9001 · IRS · IACS · IMO COMPLIANT",
+    credit: {
+      label: "Designed & maintained by",
+      name:  "AFTR Labs",
+      href:  "https://alteringfuture.com/",
+      logo:  "/images/home/aftrlogo.jpg",
+    },
   },
 } as const;
 
@@ -721,17 +752,17 @@ export const seo: Record<string, RouteMeta> = {
   "/": {
     title: "Torque Group — Maritime Engineering Holding · India & Germany",
     description:
-      "Maritime engineering holding group operating marine pump manufacturing, valve engineering, technical training, hydraulic repair and IMO safety systems across India and Germany since 1991.",
+      "Maritime engineering holding group operating marine pump manufacturing, valve engineering, technical training, hydraulic repair and IMO safety systems across India and Germany since 1998.",
   },
   "/about": {
-    title: "About Torque Group — 28+ Years in Maritime Engineering",
+    title: "About Torque Group — 25+ Years in Maritime Engineering",
     description:
-      "Engineer-led maritime holding group operating five specialised companies across India and Germany. Founded 1991. IRS · IACS · DIN · IMO aligned.",
+      "Engineer-led maritime holding group operating five specialised companies across India and Germany. Founded 1998. IRS · IACS · DIN · IMO aligned.",
   },
   "/companies": {
     title: "Group Companies — Torque Group",
     description:
-      "Five maritime engineering companies under Torque Group: pump manufacturing (Subhags), valve engineering (Armaturen-Wolff), marine training (Institute), hydraulic repair (TT Chennai), IMO signage (Nulite).",
+      "Five maritime engineering companies under Torque Group: pump manufacturing (Subhag Engineers), valve engineering (Armaturen-Wolff), marine training (Institute), hydraulic repair (TT Chennai), IMO signage (Nulite).",
   },
   "/infrastructure": {
     title: "Infrastructure — Workshops, Factories, Labs · Torque Group",

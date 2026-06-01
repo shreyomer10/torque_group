@@ -14,6 +14,7 @@ export function ImageOrPlaceholder({
   fill = true,
   priority = false,
   sizes,
+  objectFit = "cover",
 }: {
   src: string; // e.g. "/images/team/founder.jpg"
   alt: string;
@@ -22,6 +23,7 @@ export function ImageOrPlaceholder({
   fill?: boolean;
   priority?: boolean;
   sizes?: string;
+  objectFit?: "cover" | "contain";
 }) {
   const absolute = path.join(process.cwd(), "public", src.replace(/^\//, ""));
   const has = existsSync(absolute);
@@ -45,7 +47,7 @@ export function ImageOrPlaceholder({
       sizes={sizes ?? "(max-width: 1080px) 100vw, 50vw"}
       priority={priority}
       className={className}
-      style={{ objectFit: "cover" }}
+      style={{ objectFit }}
     />
   );
 }

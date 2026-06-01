@@ -1,8 +1,9 @@
-import { infrastructure } from "@/content";
+import { infrastructure, galleryOrder, galleries } from "@/content";
 import { PageHead } from "@/components/ui/PageHead";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { InfraTile } from "@/components/infrastructure/InfraTile";
 import { EquipmentTable } from "@/components/infrastructure/EquipmentTable";
+import { GalleryCarousel } from "@/components/infrastructure/GalleryCarousel";
 import { Reveal } from "@/components/layout/Reveal";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd } from "@/lib/schema";
@@ -29,20 +30,38 @@ export default function InfrastructurePage() {
           <div style={{ height: 40 }} />
 
           <Reveal className="infra-grid">
-            {i.tiles.map((t) => (
-              <InfraTile
-                key={t.id}
-                id={t.id}
-                size={t.size as "large" | "medium" | "small"}
-                corner={t.corner}
-                tag={t.tag}
-                h4={t.h4}
-                desc={t.desc}
-              />
-            ))}
+            {i.tiles.map((t) => {
+              const gh = "galleryHref" in t ? (t.galleryHref as string) : undefined;
+              const gi = "galleryImage" in t ? (t.galleryImage as string) : undefined;
+              const count = gh
+                ? galleries[gh.split("/").pop() as keyof typeof galleries]?.photos.length
+                : undefined;
+              return (
+                <InfraTile
+                  key={t.id}
+                  id={t.id}
+                  size={t.size as "large" | "medium" | "small"}
+                  corner={t.corner}
+                  tag={t.tag}
+                  h4={t.h4}
+                  desc={t.desc}
+                  image={gi}
+                  href={gh}
+                  photoCount={count}
+                />
+              );
+            })}
           </Reveal>
         </div>
       </section>
+
+      {galleryOrder.map((loc) => (
+        <section key={loc} style={{ background: "var(--bg-alt)" }}>
+          <div className="container-tg">
+            <GalleryCarousel location={loc} />
+          </div>
+        </section>
+      ))}
 
       <section style={{ background: "var(--bg-alt)" }}>
         <div className="container-tg">

@@ -14,8 +14,12 @@ export function CompanyDetail({ id }: { id: CompanyId }) {
   const c = companies[id];
   return (
     <div className="cd">
-      <Eyebrow>{`${c.code} · ${c.discipline}`}</Eyebrow>
-      <h3>{c.name}</h3>
+      <div className="cd-head">
+        <div className="cd-head-text">
+          <Eyebrow>{`${c.code} · ${c.discipline}`}</Eyebrow>
+          <h3>{c.name}</h3>
+        </div>
+      </div>
       <p className="mono">{c.email}</p>
       <p className="mono">{c.phone ? `${c.phone} · ${LOCATION_BY[id]}` : LOCATION_BY[id]}</p>
       <p>{c.blurb}</p>

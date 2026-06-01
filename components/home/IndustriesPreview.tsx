@@ -5,7 +5,7 @@ import { Reveal } from "@/components/layout/Reveal";
 
 // Short labels for the home-page preview; full descriptions live on /industries.
 const PREVIEW = [
-  { n: "01", h: "Marine", p: "Pumps, valves, hydraulics and shipboard repair across merchant fleets." },
+  { n: "01", h: "Marine", p: "Hydraulic machinery repairs, maintenance, spares, consultancy and shipboard service — alongside pumps and valves across merchant fleets." },
   { n: "02", h: "Shipbuilding", p: "New-build supply of valves, pumping systems and IMO signage packages." },
   { n: "03", h: "Offshore", p: "Process valves, hydraulic systems and retrofit engineering for offshore assets." },
   { n: "04", h: "Industrial Manufacturing", p: "Pumping infrastructure and engineered process systems for plants." },

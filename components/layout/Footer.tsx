@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { brand, footer, companies, companyOrder } from "@/content";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 
@@ -24,7 +25,9 @@ export function Footer() {
         <div className="cols">
           <div>
             <Link href="/" className="brand">
-              <div className="brand-mark" aria-hidden="true">T</div>
+              <span className="brand-logo-chip" aria-hidden="true">
+                <Image src="/images/logo.png" alt="" width={30} height={30} />
+              </span>
               <div className="brand-text">
                 <div className="name">{brand.shortName}</div>
                 <div className="sub">Maritime · Engineering</div>
@@ -62,6 +65,15 @@ export function Footer() {
 
         <div className="footer-bottom">
           <span>{footer.bottom.left}</span>
+          <a
+            className="footer-credit"
+            href={footer.bottom.credit.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{footer.bottom.credit.label}&nbsp;</span>
+            <span className="footer-credit-name">{footer.bottom.credit.name}</span>
+          </a>
           <span>{footer.bottom.right}</span>
         </div>
       </div>

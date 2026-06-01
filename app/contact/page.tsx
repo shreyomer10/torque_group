@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { contact } from "@/content";
 import { PageHead } from "@/components/ui/PageHead";
 import { ContactInteractive } from "@/components/contact/ContactInteractive";
+import { Reveal } from "@/components/layout/Reveal";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd } from "@/lib/schema";
 
@@ -18,7 +19,7 @@ export default function ContactPage() {
             <ContactInteractive />
           </Suspense>
 
-          <div className="contact-foot">
+          <Reveal className="contact-foot">
             {contact.blocks.map((b) => (
               <div className="block" key={b.h4}>
                 <h4>{b.h4}</h4>
@@ -30,7 +31,7 @@ export default function ContactPage() {
                 })}
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 

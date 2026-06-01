@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -27,7 +28,15 @@ export function Nav() {
     <header className="nav-tg">
       <div className="container-tg nav-inner">
         <Link href="/" className="brand" aria-label={`${brand.name} — home`}>
-          <div className="brand-mark" aria-hidden="true">T</div>
+          <Image
+            className="brand-logo"
+            src="/images/logo.png"
+            alt=""
+            width={38}
+            height={38}
+            priority
+            aria-hidden="true"
+          />
           <div className="brand-text">
             <div className="name">{brand.shortName}</div>
             <div className="sub">{brand.sub}</div>

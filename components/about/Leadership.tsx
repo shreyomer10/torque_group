@@ -2,6 +2,7 @@ import { about } from "@/content";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/layout/Reveal";
 import { ImageOrPlaceholder } from "@/components/shared/ImageOrPlaceholder";
+import { TeamCardBody } from "./TeamCardBody";
 
 export function Leadership() {
   const l = about.leadership;
@@ -13,20 +14,23 @@ export function Leadership() {
             <Eyebrow>{l.eyebrow}</Eyebrow>
             <h2>{l.h2}</h2>
           </div>
-          <p style={{ maxWidth: 340 }}>{l.body}</p>
         </Reveal>
         <Reveal className="team-grid">
-          {l.members.map((m) => (
-            <div className="team-card" key={m.role}>
-              <div className="team-photo with-portrait-label" style={{ position: "relative" }}>
-                <ImageOrPlaceholder src={m.photo} alt={`Portrait of ${m.name}, ${m.title}`} withLabel={false} />
+          {l.members.map((m, i) => (
+            <div className="team-card" key={m.name}>
+              <div className="team-photo">
+                <div className="team-photo-circle">
+                  <ImageOrPlaceholder
+                    src={m.photo}
+                    alt={`Portrait of ${m.name}, ${m.title}`}
+                    withLabel
+                    objectFit="cover"
+                    priority={i === 0}
+                    sizes="(max-width: 1080px) 50vw, 180px"
+                  />
+                </div>
               </div>
-              <div className="team-body">
-                <div className="team-role">{m.role}</div>
-                <h3>{m.name}</h3>
-                <div className="team-title">{m.title}</div>
-                <p>{m.bio}</p>
-              </div>
+              <TeamCardBody m={m} />
             </div>
           ))}
         </Reveal>

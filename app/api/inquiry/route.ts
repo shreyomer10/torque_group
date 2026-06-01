@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("Inquiry send failed:", err);
     return NextResponse.json(
-      { ok: false, error: "Failed to send. Please email group@torquegroup.com." },
+      { ok: false, error: "Failed to send. Please email sepl@subhagmail.com." },
       { status: 502 }
     );
   }

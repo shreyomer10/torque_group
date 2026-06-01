@@ -1,15 +1,15 @@
+import Image from "next/image";
 import type { Company } from "@/content";
 import { companiesPage } from "@/content";
 import { LinkButton } from "@/components/ui/Button";
-import { ImageOrPlaceholder } from "@/components/shared/ImageOrPlaceholder";
 import { Reveal } from "@/components/layout/Reveal";
 
-const IMAGE_FOR: Record<string, string> = {
-  institute: "/images/companies/institute.jpg",
-  chennai:   "/images/companies/chennai.jpg",
-  subhags:   "/images/companies/subhags.jpg",
-  nulite:    "/images/companies/nulite.jpg",
-  wolff:     "/images/companies/wolff.jpg",
+const LOGO_FOR: Record<string, string> = {
+  institute: "/assets/logos/ttmumbai.jpg",
+  chennai:   "/assets/logos/ttChennai.jpeg",
+  subhags:   "/assets/logos/shubags.png",
+  nulite:    "/assets/logos/nulite.png",
+  wolff:     "/assets/logos/wold.png",
 };
 
 const CORNER_FOR: Record<string, string> = {
@@ -20,10 +20,10 @@ const CORNER_FOR: Record<string, string> = {
   wolff:     "WOLFF · HAMBURG",
 };
 
-export function CompanyBlock({ company, reverse = false }: { company: Company; reverse?: boolean }) {
+export function CompanyBlock({ company }: { company: Company }) {
   const c = company;
   return (
-    <Reveal className={`company ${reverse ? "reverse" : ""}`} id={c.id}>
+    <Reveal className="company" id={c.id}>
       <div className="company-body">
         <span className="index">{c.code.replace("·", "/")} · {c.discipline}</span>
         <h3>{c.name}</h3>
@@ -40,8 +40,15 @@ export function CompanyBlock({ company, reverse = false }: { company: Company; r
         </div>
       </div>
       <div className="company-visual">
-        <ImageOrPlaceholder src={IMAGE_FOR[c.id]} alt={`${c.name} — ${c.discipline.toLowerCase()}`} />
-        <div className="overlay" />
+        <div className="company-logo">
+          <Image
+            src={LOGO_FOR[c.id]}
+            alt={`${c.name} logo`}
+            fill
+            sizes="(max-width: 1080px) 100vw, 50vw"
+            style={{ objectFit: "contain" }}
+          />
+        </div>
         <div className="corner-tag">{CORNER_FOR[c.id]}</div>
         <div className="spec">
           {c.chips.map((chip) => (

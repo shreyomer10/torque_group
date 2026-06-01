@@ -1,10 +1,15 @@
-import { home } from "@/content";
+import type { CSSProperties } from "react";
+import Image from "next/image";
+import { home, clientLogos } from "@/content";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/layout/Reveal";
 
 export function Clients() {
   const c = home.clients;
-  const slots = Array.from({ length: c.slots }, (_, i) => i + 1);
+  const count = clientLogos.length;
+  // Duplicate the track so the -50% translate loops seamlessly.
+  const track = [...clientLogos, ...clientLogos];
+
   return (
     <section>
       <div className="container-tg">
@@ -15,14 +20,32 @@ export function Clients() {
           </div>
           <p style={{ maxWidth: 340 }}>{c.body}</p>
         </Reveal>
-        <Reveal className="clients-grid">
-          {slots.map((n) => (
-            <div className="client-logo" key={n}>
-              <span>CLIENT {String(n).padStart(2, "0")}</span>
-            </div>
-          ))}
-        </Reveal>
       </div>
+
+      {/* Full-bleed marquee: single horizontal row, constant speed, always running. */}
+      <Reveal className="clients-marquee">
+        <div className="clients-track" style={{ "--client-count": count } as CSSProperties}>
+          {track.map((logo, i) => {
+            // The marquee translates logos far outside the initial viewport,
+            // where a lazy intersection observer never fires — leaving blank
+            // cells on wide screens. The roster is small, so load every logo
+            // eagerly. The duplicate pass is decorative and aria-hidden.
+            const isDuplicate = i >= count;
+            return (
+              <div className="client-logo" key={`${logo.src}-${i}`} aria-hidden={isDuplicate}>
+                <Image
+                  src={logo.src}
+                  alt={isDuplicate ? "" : logo.name}
+                  fill
+                  sizes="230px"
+                  loading="eager"
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </Reveal>
     </section>
   );
 }

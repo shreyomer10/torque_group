@@ -17,8 +17,8 @@ export default function CompaniesPage() {
       />
       <section>
         <div className="container-tg">
-          {companyOrder.map((id, i) => (
-            <CompanyBlock key={id} company={companies[id]} reverse={i % 2 === 1} />
+          {companyOrder.map((id) => (
+            <CompanyBlock key={id} company={companies[id]} />
           ))}
         </div>
       </section>
