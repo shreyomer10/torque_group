@@ -17,19 +17,11 @@ const nextConfig = {
     }
     return config;
   },
-  // Force the bare (non-www) domain as canonical. Any request to the
-  // www host is 308-redirected to the apex domain so Google indexes
-  // a single URL. Keep this in sync with NEXT_PUBLIC_SITE_URL.
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.torquegroupcompanies.com" }],
-        destination: "https://torquegroupcompanies.com/:path*",
-        permanent: true,
-      },
-    ];
-  },
+  // Canonical host is www.torquegroupcompanies.com. The apex domain is
+  // 307-redirected to www at the Vercel domain layer (Settings > Domains),
+  // so we do NOT add an app-level redirect here — doing so would create a
+  // www -> apex -> www loop (ERR_TOO_MANY_REDIRECTS). Keep this in sync
+  // with NEXT_PUBLIC_SITE_URL (= https://www.torquegroupcompanies.com).
 };
 
 export default nextConfig;
