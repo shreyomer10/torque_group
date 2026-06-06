@@ -7,17 +7,10 @@ import { Reveal } from "@/components/layout/Reveal";
 const LOGO_FOR: Record<string, string> = {
   institute: "/assets/logos/ttmumbai.jpg",
   chennai:   "/assets/logos/ttChennai.jpeg",
+  ttpune:    "/assets/logos/ttChennai.jpeg",
   subhags:   "/assets/logos/shubags.png",
   nulite:    "/assets/logos/nulite.png",
   wolff:     "/assets/logos/wold.png",
-};
-
-const CORNER_FOR: Record<string, string> = {
-  institute: "INSTITUTE · MUMBAI",
-  chennai:   "TT · CHENNAI",
-  subhags:   "SUBHAGS · PUNE",
-  nulite:    "NULITE",
-  wolff:     "WOLFF · HAMBURG",
 };
 
 export function CompanyBlock({ company }: { company: Company }) {
@@ -49,7 +42,6 @@ export function CompanyBlock({ company }: { company: Company }) {
             style={{ objectFit: "contain" }}
           />
         </div>
-        <div className="corner-tag">{CORNER_FOR[c.id]}</div>
         <div className="spec">
           {c.chips.map((chip) => (
             <div key={chip.label}>

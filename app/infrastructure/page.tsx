@@ -1,9 +1,8 @@
-import { infrastructure, galleryOrder, galleries } from "@/content";
+import { infrastructure, galleries } from "@/content";
 import { PageHead } from "@/components/ui/PageHead";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { InfraTile } from "@/components/infrastructure/InfraTile";
 import { EquipmentTable } from "@/components/infrastructure/EquipmentTable";
-import { GalleryCarousel } from "@/components/infrastructure/GalleryCarousel";
 import { Reveal } from "@/components/layout/Reveal";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd } from "@/lib/schema";
@@ -54,14 +53,6 @@ export default function InfrastructurePage() {
           </Reveal>
         </div>
       </section>
-
-      {galleryOrder.map((loc) => (
-        <section key={loc} style={{ background: "var(--bg-alt)" }}>
-          <div className="container-tg">
-            <GalleryCarousel location={loc} />
-          </div>
-        </section>
-      ))}
 
       <section style={{ background: "var(--bg-alt)" }}>
         <div className="container-tg">

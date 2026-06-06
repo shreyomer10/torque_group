@@ -2,7 +2,6 @@ import { industries } from "@/content";
 import { PageHead } from "@/components/ui/PageHead";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/layout/Reveal";
-import { Matrix } from "@/components/industries/Matrix";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbJsonLd } from "@/lib/schema";
 
@@ -24,20 +23,6 @@ export default function IndustriesPage() {
                 <p>{s.desc}</p>
               </div>
             ))}
-          </Reveal>
-        </div>
-      </section>
-
-      <section style={{ background: "var(--bg-alt)" }}>
-        <div className="container-tg">
-          <Reveal className="section-head">
-            <div className="text">
-              <Eyebrow>{i.matrix.eyebrow}</Eyebrow>
-              <h2>{i.matrix.h2}</h2>
-            </div>
-          </Reveal>
-          <Reveal>
-            <Matrix />
           </Reveal>
         </div>
       </section>

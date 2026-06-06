@@ -14,17 +14,6 @@ export function Corridor() {
             <Eyebrow>{c.eyebrow}</Eyebrow>
             <h2 style={{ marginTop: 8 }}>{c.h2}</h2>
             <p>{c.body}</p>
-            <p
-              className="muted"
-              style={{
-                fontFamily: "var(--font-mono), 'JetBrains Mono', monospace",
-                fontSize: 12,
-                letterSpacing: ".14em",
-                textTransform: "uppercase",
-              }}
-            >
-              {c.footnote}
-            </p>
           </div>
         </Reveal>
       </div>

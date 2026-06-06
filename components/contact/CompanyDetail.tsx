@@ -5,6 +5,7 @@ import { LinkButton } from "@/components/ui/Button";
 const LOCATION_BY: Record<CompanyId, string> = {
   institute: "Mumbai, IN",
   chennai:   "Chennai, IN",
+  ttpune:    "Pune, IN",
   subhags:   "Pune, IN",
   nulite:    "India",
   wolff:     "Hamburg, Germany",

@@ -19,6 +19,7 @@ export const GROUP_INBOX = process.env.MAIL_GROUP ?? "sepl@subhagmail.com";
 export const RECIPIENTS: Record<CompanyId, string> = {
   institute: process.env.MAIL_INSTITUTE ?? companies.institute.email,
   chennai:   process.env.MAIL_CHENNAI   ?? companies.chennai.email,
+  ttpune:    process.env.MAIL_TTPUNE    ?? companies.ttpune.email,
   subhags:   process.env.MAIL_SUBHAGS   ?? companies.subhags.email,
   nulite:    process.env.MAIL_NULITE    ?? companies.nulite.email,
   wolff:     process.env.MAIL_WOLFF     ?? companies.wolff.email,
