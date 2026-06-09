@@ -32,7 +32,7 @@ export function GalleryCarousel({ location }: { location: GalleryLocation }) {
         {preview.map((p, i) => (
           <Link key={p.slug} href={href} className="gc-item" aria-label={`${p.title} — open ${g.name} gallery`}>
             <Image
-              src={`${g.dir}/${p.slug}-thumb.webp`}
+              src={p.thumbSrc ?? `${g.dir}/${p.slug}-thumb.webp`}
               alt={p.title}
               fill
               sizes="(max-width: 720px) 50vw, 18vw"

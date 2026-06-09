@@ -205,7 +205,7 @@ export const companies: Record<CompanyId, Company> = {
     email: "pune@torquetechniques.com",
     phone: "+91 99224 40667",
     address: "Plot No. 34, Poona Small Scale Industrial Estate, Gultekdi, Pune – 411 037, India",
-    picker: { line1: "TT Pune", line2: "Hydraulic repair · Pune" },
+    picker: { line1: "Torque Techniques Pune", line2: "Hydraulic repair · Pune" },
     seoKeywords: [
       "shipboard hydraulic repair Pune",
       "marine steering gear overhaul India",
@@ -587,6 +587,8 @@ export const infrastructure = {
       h4:     "Subhag Engineers pump factory",
       desc:   "Machining, assembly and pressure-test cells for marine and industrial pump systems.",
       image:  "bg-factory",
+      galleryImage: "/images/infrastructure/subhag/subhag-shopfloor.jpg",
+      galleryHref:  "/infrastructure/gallery/subhag",
     },
     {
       id: "pune-hyd",
@@ -596,6 +598,8 @@ export const infrastructure = {
       h4:     "Torque Techniques Pune workshop",
       desc:   "Shipboard hydraulic repair — steering gears, deck machinery, cylinders and power packs.",
       image:  "bg-hyd",
+      galleryImage: "/images/infrastructure/torque-pune/interlock-valve-assembly.jpg",
+      galleryHref:  "/infrastructure/gallery/torque-pune",
     },
     {
       id: "chennai-hyd",
@@ -833,7 +837,7 @@ export const seo: Record<string, RouteMeta> = {
   "/infrastructure": {
     title: "Infrastructure — Workshops, Factories, Labs · Torque Group",
     description:
-      "100+ engineers and technicians across marine workshops, pump factory, hydraulic repair lines, training labs and valve engineering facilities in Pune, Mumbai, Chennai, Dubai and Hamburg.",
+      "Photo galleries and operational infrastructure across marine workshops, Subhag pump factory, Torque Techniques Pune hydraulic repair, training labs and valve engineering facilities in Pune, Mumbai, Chennai, Dubai and Hamburg.",
   },
   "/industries": {
     title: "Industries Served — Marine, Shipbuilding, Offshore, Industrial",
@@ -850,9 +854,13 @@ export const seo: Record<string, RouteMeta> = {
 export const seoKeywordsGlobal = [
   "maritime engineering group India",
   "marine pump manufacturer India",
+  "Subhag Engineers pump factory Pune",
+  "Torque Techniques Pune hydraulic repair",
   "marine valve manufacturer Germany",
   "marine technical training Mumbai",
+  "Torque Technics Institute Mumbai",
   "shipboard hydraulic repair Chennai",
+  "Torque Technics Chennai",
   "IMO signage manufacturer",
   "marine retrofit India",
   "IACS IRS DIN ISO 9001 IMO compliant",

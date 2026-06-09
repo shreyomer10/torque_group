@@ -13,6 +13,8 @@
 export type GalleryPhoto = {
   slug: string;   // filename stem under the location folder
   title: string;
+  thumbSrc?: string;
+  fullSrc?: string;
 };
 
 export type Gallery = {
@@ -48,6 +50,26 @@ const chennaiPhotos: GalleryPhoto[] = [
   { slug: "class-room-2",                          title: "Classroom" },
 ];
 
+const subhagPhotos: GalleryPhoto[] = [
+  { slug: "subhag-shopfloor", title: "Subhag Workshop Floor", thumbSrc: "/images/infrastructure/subhag/subhag-shopfloor.jpg", fullSrc: "/images/infrastructure/subhag/subhag-shopfloor.jpg" },
+  { slug: "subhag-machining-01", title: "Machining Bay", thumbSrc: "/images/infrastructure/subhag/subhag-machining-01.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-01.jpg" },
+  { slug: "subhag-machining-02", title: "Pump Component Machining", thumbSrc: "/images/infrastructure/subhag/subhag-machining-02.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-02.jpg" },
+  { slug: "subhag-machining-03", title: "Workshop Equipment", thumbSrc: "/images/infrastructure/subhag/subhag-machining-03.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-03.jpg" },
+  { slug: "subhag-machining-04", title: "Assembly Area", thumbSrc: "/images/infrastructure/subhag/subhag-machining-04.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-04.jpg" },
+  { slug: "subhag-machining-05", title: "Pump Manufacturing Cell", thumbSrc: "/images/infrastructure/subhag/subhag-machining-05.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-05.jpg" },
+  { slug: "foundry-pouring", title: "Foundry Pouring Process", thumbSrc: "/images/infrastructure/subhag/foundry-pouring.jpg", fullSrc: "/images/infrastructure/subhag/foundry-pouring.jpg" },
+  { slug: "cast-iron-reference", title: "Cast Iron Reference", thumbSrc: "/images/infrastructure/subhag/cast-iron-reference.png", fullSrc: "/images/infrastructure/subhag/cast-iron-reference.png" },
+  { slug: "foundry-reference", title: "Foundry Reference", thumbSrc: "/images/infrastructure/subhag/foundry-reference.jpg", fullSrc: "/images/infrastructure/subhag/foundry-reference.jpg" },
+  { slug: "casting-reference", title: "Casting Reference", thumbSrc: "/images/infrastructure/subhag/casting-reference.jpg", fullSrc: "/images/infrastructure/subhag/casting-reference.jpg" },
+];
+
+const torquePunePhotos: GalleryPhoto[] = [
+  { slug: "twids-photo", title: "TWIDS System", thumbSrc: "/images/infrastructure/torque-pune/twids-photo.jpg", fullSrc: "/images/infrastructure/torque-pune/twids-photo.jpg" },
+  { slug: "interlock-valve-assembly", title: "Interlock Valve Assembly", thumbSrc: "/images/infrastructure/torque-pune/interlock-valve-assembly.jpg", fullSrc: "/images/infrastructure/torque-pune/interlock-valve-assembly.jpg" },
+  { slug: "mooring-winch-brake-test-kit", title: "Mooring Winch Brake Test Kit", thumbSrc: "/images/infrastructure/torque-pune/mooring-winch-brake-test-kit.jpg", fullSrc: "/images/infrastructure/torque-pune/mooring-winch-brake-test-kit.jpg" },
+  { slug: "bunker-sampler-installation", title: "Bunker Sampler Installation", thumbSrc: "/images/infrastructure/torque-pune/bunker-sampler-installation.jpg", fullSrc: "/images/infrastructure/torque-pune/bunker-sampler-installation.jpg" },
+];
+
 export const galleries: Record<string, Gallery> = {
   mumbai: {
     location: "mumbai",
@@ -67,9 +89,27 @@ export const galleries: Record<string, Gallery> = {
     dir: "/images/infrastructure/chennai",
     photos: chennaiPhotos,
   },
+  subhag: {
+    location: "subhag",
+    facility: "FACILITY · 02 · PUNE",
+    name: "Subhag Engineers Pump Factory — Pune",
+    blurb:
+      "Pump manufacturing infrastructure — machining, assembly, foundry reference and production-floor views.",
+    dir: "/images/infrastructure/subhag",
+    photos: subhagPhotos,
+  },
+  "torque-pune": {
+    location: "torque-pune",
+    facility: "FACILITY · 03 · PUNE",
+    name: "Torque Techniques Pune Workshop",
+    blurb:
+      "Hydraulic and deck-machinery service assets — valve assemblies, TWIDS, bunker sampler installation and winch test equipment.",
+    dir: "/images/infrastructure/torque-pune",
+    photos: torquePunePhotos,
+  },
 };
 
-export const galleryOrder = ["mumbai", "chennai"] as const;
+export const galleryOrder = ["mumbai", "subhag", "torque-pune", "chennai"] as const;
 export type GalleryLocation = (typeof galleryOrder)[number];
 
 /** First N photos of a gallery — used for the infrastructure-page carousel. */

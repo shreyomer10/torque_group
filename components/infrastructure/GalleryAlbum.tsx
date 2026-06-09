@@ -48,7 +48,7 @@ export function GalleryAlbum({ gallery }: { gallery: Gallery }) {
             aria-label={`Open ${p.title}`}
           >
             <Image
-              src={`${gallery.dir}/${p.slug}-thumb.webp`}
+              src={p.thumbSrc ?? `${gallery.dir}/${p.slug}-thumb.webp`}
               alt={p.title}
               fill
               sizes="(max-width: 720px) 50vw, (max-width: 1080px) 33vw, 25vw"
@@ -91,7 +91,7 @@ export function GalleryAlbum({ gallery }: { gallery: Gallery }) {
             >
               <div className="lb-image-wrap">
                 <Image
-                  src={`${gallery.dir}/${active.slug}-full.webp`}
+                  src={active.fullSrc ?? `${gallery.dir}/${active.slug}-full.webp`}
                   alt={active.title}
                   fill
                   sizes="90vw"
