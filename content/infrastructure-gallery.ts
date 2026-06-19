@@ -50,25 +50,46 @@ const chennaiPhotos: GalleryPhoto[] = [
   { slug: "class-room-2",                          title: "Classroom" },
 ];
 
+// Sources optimized to <slug>-thumb.webp / <slug>-full.webp by
+// scripts/optimize-gallery.mjs, so thumb/full paths are derived like mumbai/chennai.
 const subhagPhotos: GalleryPhoto[] = [
-  { slug: "subhag-shopfloor", title: "Subhag Workshop Floor", thumbSrc: "/images/infrastructure/subhag/subhag-shopfloor.jpg", fullSrc: "/images/infrastructure/subhag/subhag-shopfloor.jpg" },
-  { slug: "subhag-machining-01", title: "Machining Bay", thumbSrc: "/images/infrastructure/subhag/subhag-machining-01.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-01.jpg" },
-  { slug: "subhag-machining-02", title: "Pump Component Machining", thumbSrc: "/images/infrastructure/subhag/subhag-machining-02.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-02.jpg" },
-  { slug: "subhag-machining-03", title: "Workshop Equipment", thumbSrc: "/images/infrastructure/subhag/subhag-machining-03.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-03.jpg" },
-  { slug: "subhag-machining-04", title: "Assembly Area", thumbSrc: "/images/infrastructure/subhag/subhag-machining-04.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-04.jpg" },
-  { slug: "subhag-machining-05", title: "Pump Manufacturing Cell", thumbSrc: "/images/infrastructure/subhag/subhag-machining-05.jpg", fullSrc: "/images/infrastructure/subhag/subhag-machining-05.jpg" },
-  { slug: "foundry-pouring", title: "Foundry Pouring Process", thumbSrc: "/images/infrastructure/subhag/foundry-pouring.jpg", fullSrc: "/images/infrastructure/subhag/foundry-pouring.jpg" },
-  { slug: "cast-iron-reference", title: "Cast Iron Reference", thumbSrc: "/images/infrastructure/subhag/cast-iron-reference.png", fullSrc: "/images/infrastructure/subhag/cast-iron-reference.png" },
-  { slug: "foundry-reference", title: "Foundry Reference", thumbSrc: "/images/infrastructure/subhag/foundry-reference.jpg", fullSrc: "/images/infrastructure/subhag/foundry-reference.jpg" },
-  { slug: "casting-reference", title: "Casting Reference", thumbSrc: "/images/infrastructure/subhag/casting-reference.jpg", fullSrc: "/images/infrastructure/subhag/casting-reference.jpg" },
+  { slug: "subhag-shopfloor", title: "Subhag Workshop Floor" },
+  { slug: "subhag-machining-01", title: "Machining Bay" },
+  { slug: "subhag-machining-02", title: "Pump Component Machining" },
+  { slug: "subhag-machining-03", title: "Workshop Equipment" },
+  { slug: "subhag-machining-04", title: "Assembly Area" },
+  { slug: "subhag-machining-05", title: "Pump Manufacturing Cell" },
+  { slug: "foundry-pouring", title: "Foundry Pouring Process" },
+  { slug: "cast-iron-reference", title: "Cast Iron Reference" },
+  { slug: "foundry-reference", title: "Foundry Reference" },
+  { slug: "casting-reference", title: "Casting Reference" },
 ];
 
 const torquePunePhotos: GalleryPhoto[] = [
-  { slug: "twids-photo", title: "TWIDS System", thumbSrc: "/images/infrastructure/torque-pune/twids-photo.jpg", fullSrc: "/images/infrastructure/torque-pune/twids-photo.jpg" },
-  { slug: "interlock-valve-assembly", title: "Interlock Valve Assembly", thumbSrc: "/images/infrastructure/torque-pune/interlock-valve-assembly.jpg", fullSrc: "/images/infrastructure/torque-pune/interlock-valve-assembly.jpg" },
-  { slug: "mooring-winch-brake-test-kit", title: "Mooring Winch Brake Test Kit", thumbSrc: "/images/infrastructure/torque-pune/mooring-winch-brake-test-kit.jpg", fullSrc: "/images/infrastructure/torque-pune/mooring-winch-brake-test-kit.jpg" },
-  { slug: "bunker-sampler-installation", title: "Bunker Sampler Installation", thumbSrc: "/images/infrastructure/torque-pune/bunker-sampler-installation.jpg", fullSrc: "/images/infrastructure/torque-pune/bunker-sampler-installation.jpg" },
+  { slug: "twids-photo", title: "TWIDS System" },
+  { slug: "interlock-valve-assembly", title: "Interlock Valve Assembly" },
+  { slug: "mooring-winch-brake-test-kit", title: "Mooring Winch Brake Test Kit" },
+  { slug: "bunker-sampler-installation", title: "Bunker Sampler Installation" },
 ];
+
+// Titles for the descriptive originals; everything else falls back to a generic label.
+const wolffTitles: Record<number, string> = {
+  2: "Valve Cabinet Assembly",
+  4: "Coarse Filter — DG",
+  5: "DN200 Pressure Change-Over Valve Box (5-part)",
+  24: "Coarse Filter",
+};
+
+// Sources are optimized to <slug>-thumb.webp / <slug>-full.webp by
+// scripts/optimize-wolff.mjs, so thumb/full paths are derived like mumbai/chennai.
+const wolffPhotos: GalleryPhoto[] = Array.from({ length: 31 }, (_, i) => {
+  const n = i + 1;
+  const nn = String(n).padStart(2, "0");
+  return {
+    slug: `wolff-${nn}`,
+    title: wolffTitles[n] ?? `Valve Engineering · ${nn}`,
+  };
+});
 
 export const galleries: Record<string, Gallery> = {
   mumbai: {
@@ -107,9 +128,18 @@ export const galleries: Record<string, Gallery> = {
     dir: "/images/infrastructure/torque-pune",
     photos: torquePunePhotos,
   },
+  wolff: {
+    location: "wolff",
+    facility: "FACILITY · 05 · HAMBURG",
+    name: "Armaturen-Wolff Workshop — Hamburg",
+    blurb:
+      "German maritime valve engineering — precision valve machining, change-over valve boxes, coarse filters and flow-control assemblies built to DIN · ISO · IACS standards.",
+    dir: "/images/infrastructure/wolff",
+    photos: wolffPhotos,
+  },
 };
 
-export const galleryOrder = ["mumbai", "subhag", "torque-pune", "chennai"] as const;
+export const galleryOrder = ["mumbai", "subhag", "torque-pune", "chennai", "wolff"] as const;
 export type GalleryLocation = (typeof galleryOrder)[number];
 
 /** First N photos of a gallery — used for the infrastructure-page carousel. */

@@ -587,7 +587,7 @@ export const infrastructure = {
       h4:     "Subhag Engineers pump factory",
       desc:   "Machining, assembly and pressure-test cells for marine and industrial pump systems.",
       image:  "bg-factory",
-      galleryImage: "/images/infrastructure/subhag/subhag-shopfloor.jpg",
+      galleryImage: "/images/infrastructure/subhag/subhag-shopfloor-thumb.webp",
       galleryHref:  "/infrastructure/gallery/subhag",
     },
     {
@@ -598,7 +598,7 @@ export const infrastructure = {
       h4:     "Torque Techniques Pune workshop",
       desc:   "Shipboard hydraulic repair — steering gears, deck machinery, cylinders and power packs.",
       image:  "bg-hyd",
-      galleryImage: "/images/infrastructure/torque-pune/interlock-valve-assembly.jpg",
+      galleryImage: "/images/infrastructure/torque-pune/interlock-valve-assembly-thumb.webp",
       galleryHref:  "/infrastructure/gallery/torque-pune",
     },
     {
@@ -620,6 +620,8 @@ export const infrastructure = {
       h4:     "Armaturen-Wolff workshop",
       desc:   "Precision valve machining, assembly and flow-control test benches built to German maritime standards.",
       image:  "bg-valve",
+      galleryImage: "/images/infrastructure/wolff/wolff-02-thumb.webp",
+      galleryHref:  "/infrastructure/gallery/wolff",
     },
   ],
   equipment: {
